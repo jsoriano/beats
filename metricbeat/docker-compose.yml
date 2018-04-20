@@ -4,6 +4,7 @@ services:
     build: ${PWD}/.
     environment:
       - TEST_ENVIRONMENT=false
+      - BUILD_DIR=/tmp/build
     working_dir: /go/src/github.com/elastic/beats/metricbeat
     volumes:
       - ${PWD}/..:/go/src/github.com/elastic/beats/

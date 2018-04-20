@@ -279,7 +279,7 @@ testsuite: clean update
 
 	if [ $(TEST_ENVIRONMENT) = true ]; then \
 		$(MAKE) stop-environment; \
-    fi
+	fi
 
 # Generates a coverage report from the existing coverage files
 .PHONY: coverage-report
@@ -365,6 +365,10 @@ start-environment: stop-environment
 .PHONY: stop-environment
 stop-environment:
 	-${DOCKER_COMPOSE} down -v
+
+.PHONY: clean-environment
+clean-environment:
+	-${DOCKER_COMPOSE} down -v --rmi=all >& /dev/null
 
 .PHONY: write-environment
 write-environment:
