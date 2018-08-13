@@ -29,9 +29,11 @@ import (
 	mbtest "github.com/elastic/beats/metricbeat/mb/testing"
 )
 
-func TestFetchObject(t *testing.T) {
-	compose.EnsureUp(t, "http")
+func TestMain(m *testing.M) {
+	compose.RunTestWith(m, "http")
+}
 
+func TestFetchObject(t *testing.T) {
 	f := mbtest.NewEventsFetcher(t, getConfig("object"))
 	event, err := f.Fetch()
 	if !assert.NoError(t, err) {
@@ -42,8 +44,6 @@ func TestFetchObject(t *testing.T) {
 }
 
 func TestFetchArray(t *testing.T) {
-	compose.EnsureUp(t, "http")
-
 	f := mbtest.NewEventsFetcher(t, getConfig("array"))
 	event, err := f.Fetch()
 	if !assert.NoError(t, err) {
@@ -52,9 +52,8 @@ func TestFetchArray(t *testing.T) {
 
 	t.Logf("%s/%s event: %+v", f.Module().Name(), f.Name(), event)
 }
-func TestData(t *testing.T) {
-	compose.EnsureUp(t, "http")
 
+func TestData(t *testing.T) {
 	f := mbtest.NewEventsFetcher(t, getConfig("object"))
 	err := mbtest.WriteEvents(f, t)
 	if err != nil {

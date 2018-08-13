@@ -19,21 +19,23 @@ package compose
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
 
-	"strconv"
+	"github.com/pkg/errors"
 
 	"github.com/docker/libcompose/docker"
 	"github.com/docker/libcompose/docker/ctx"
 	"github.com/docker/libcompose/project"
 	"github.com/docker/libcompose/project/options"
+
+	"github.com/elastic/beats/libbeat/logp"
 )
 
 // docker-compose project wrapper
@@ -53,44 +55,76 @@ type serviceInfo struct {
 // Regexp matching state to flag container as old
 var oldRegexp = regexp.MustCompile("minute")
 
+// RunTestWith runs a test module with a set of services running
+func RunTestWith(m *testing.M, services ...string) {
+	err := EnsureUpWithTimeout(300, services...)
+	if err != nil {
+		logp.Error(errors.Wrap(err, "failed to start services"))
+		os.Exit(-1)
+	}
+
+	result := m.Run()
+	defer os.Exit(result)
+
+	if noCompose, err := strconv.ParseBool(os.Getenv("NO_COMPOSE")); err == nil && noCompose {
+		return
+	}
+	compose, err := getComposeProject()
+	if err != nil {
+		logp.Error(errors.Wrap(err, "failed to get compose project"))
+		return
+	}
+	for _, service := range services {
+		err := compose.Kill(service)
+		if err != nil {
+			logp.Error(errors.Wrapf(err, "failed to stop service %s", service))
+		}
+	}
+}
+
 // EnsureUp starts all the requested services (must be defined in docker-compose.yml)
 // with a default timeout of 300 seconds
 func EnsureUp(t *testing.T, services ...string) {
-	EnsureUpWithTimeout(t, 300, services...)
+	err := EnsureUpWithTimeout(300, services...)
+	if err != nil {
+		t.Fatal(err)
+	}
 }
 
 // EnsureUpWithTimeout starts all the requested services (must be defined in docker-compose.yml)
 // Wait for `timeout` seconds for health
-func EnsureUpWithTimeout(t *testing.T, timeout int, services ...string) {
+func EnsureUpWithTimeout(timeout int, services ...string) error {
 	// The NO_COMPOSE env variables makes it possible to skip the starting of the environment.
 	// This is useful if the service is already running locally.
 	if noCompose, err := strconv.ParseBool(os.Getenv("NO_COMPOSE")); err == nil && noCompose {
-		return
+		return nil
 	}
 
 	compose, err := getComposeProject()
 	if err != nil {
-		t.Fatal(err)
+		return err
 	}
 
 	// Kill no longer used containers
 	err = compose.KillOld(services)
 	if err != nil {
-		t.Fatal(err)
+		return err
 	}
 
 	for _, service := range services {
 		err = compose.Start(service)
 		if err != nil {
-			t.Fatal(err)
+			return err
 		}
 	}
 
 	// Wait for health
 	err = compose.Wait(timeout, services...)
 	if err != nil {
-		t.Fatal(err)
+		return err
 	}
+
+	return nil
 }
 
 // Start the container, unless it's running already

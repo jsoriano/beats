@@ -30,7 +30,10 @@ import (
 )
 
 func TestFetch(t *testing.T) {
-	compose.EnsureUpWithTimeout(t, 600, "elasticsearch", "kibana")
+	err := compose.EnsureUpWithTimeout(600, "elasticsearch", "kibana")
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	f := mbtest.NewEventFetcher(t, mtest.GetConfig("status"))
 	event, err := f.Fetch()
