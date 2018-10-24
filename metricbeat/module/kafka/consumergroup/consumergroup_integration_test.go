@@ -20,13 +20,14 @@
 package consumergroup
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
 	"testing"
 	"time"
 
-	saramacluster "github.com/bsm/sarama-cluster"
+	"github.com/Shopify/sarama"
 	"github.com/pkg/errors"
 
 	"github.com/elastic/beats/libbeat/tests/compose"
@@ -41,7 +42,10 @@ const (
 func TestData(t *testing.T) {
 	compose.EnsureUp(t, "kafka")
 
-	c, err := startConsumer(t, "metricbeat-test")
+	ctx := context.Background()
+	defer ctx.Done()
+
+	c, err := startConsumer(t, ctx, "metricbeat-test")
 	if err != nil {
 		t.Fatal(errors.Wrap(err, "starting kafka consumer"))
 	}
@@ -58,10 +62,37 @@ func TestData(t *testing.T) {
 	t.Fatal("write", err)
 }
 
-func startConsumer(t *testing.T, topic string) (io.Closer, error) {
+type dummyConsumerGroupHandler struct{}
+
+func (dummyConsumerGroupHandler) Setup(sarama.ConsumerGroupSession) error   { return nil }
+func (dummyConsumerGroupHandler) Cleanup(sarama.ConsumerGroupSession) error { return nil }
+func (h dummyConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
+	for msg := range claim.Messages() {
+		// Just consume it
+		sess.MarkMessage(msg, "")
+	}
+	return nil
+}
+
+func startConsumer(t *testing.T, ctx context.Context, topic string) (io.Closer, error) {
 	brokers := []string{getTestKafkaHost()}
 	topics := []string{topic}
-	return saramacluster.NewConsumer(brokers, "test-group", topics, nil)
+
+	config := sarama.NewConfig()
+	// Minimal version required for consumer groups
+	config.Version = sarama.V0_10_2_0
+	cg, err := sarama.NewConsumerGroup(brokers, "test-group", config)
+	if err != nil {
+		return nil, errors.Wrap(err, "creating consumer group")
+	}
+
+	go func() {
+		err = cg.Consume(ctx, topics, &dummyConsumerGroupHandler{})
+		if err != nil {
+			t.Logf("Failed to consume: %v", err)
+		}
+	}()
+	return cg, nil
 }
 
 func getConfig() map[string]interface{} {
