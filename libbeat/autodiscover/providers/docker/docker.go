@@ -18,6 +18,8 @@
 package docker
 
 import (
+	"time"
+
 	"github.com/elastic/beats/libbeat/autodiscover"
 	"github.com/elastic/beats/libbeat/autodiscover/builder"
 	"github.com/elastic/beats/libbeat/autodiscover/template"
@@ -109,7 +111,9 @@ func (d *Provider) Start() {
 				d.emitContainer(event, "start")
 
 			case event := <-d.stopListener.Events():
-				d.emitContainer(event, "stop")
+				time.AfterFunc(d.config.CleanupTimeout, func() {
+					d.emitContainer(event, "stop")
+				})
 			}
 		}
 	}()
