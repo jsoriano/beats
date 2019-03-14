@@ -41,10 +41,9 @@ type Config struct {
 
 func defaultConfig() *Config {
 	return &Config{
-		Host:           "unix:///var/run/docker.sock",
-		Prefix:         "co.elastic",
-		Dedot:          true,
-		CleanupTimeout: 60 * time.Second,
+		Host:   "unix:///var/run/docker.sock",
+		Prefix: "co.elastic",
+		Dedot:  true,
 	}
 }
 
