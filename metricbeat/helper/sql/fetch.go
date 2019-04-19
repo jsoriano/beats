@@ -60,15 +60,19 @@ func Fetch(db *sql.DB, query string, args ...interface{}) ([]map[string]interfac
 	}
 	defer rows.Close()
 
-	columns, values, err := prepareValues(rows)
+	columns, err := rows.Columns()
 	if err != nil {
-		// This shouldn't ever happen, but just in case
-		return nil, errors.Wrap(err, "failed to prepare values")
+		return nil, errors.Wrap(err, "failed to get column names")
 	}
 
 	var results []map[string]interface{}
 	for rows.Next() {
-		err := rows.Scan(values...)
+		values, err := prepareValues(rows)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to prepare values")
+		}
+
+		err = rows.Scan(values...)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed to scan row")
 		}
@@ -84,25 +88,32 @@ func Fetch(db *sql.DB, query string, args ...interface{}) ([]map[string]interfac
 }
 
 // prepareValues gets the column names and an array ready to be used as value for Scan
-func prepareValues(rows *sql.Rows) ([]string, []interface{}, error) {
+func prepareValues(rows *sql.Rows) ([]interface{}, error) {
 	if rows == nil {
-		return nil, nil, errors.New("rows not initialized")
-	}
-
-	columns, err := rows.Columns()
-	if err != nil {
-		return nil, nil, errors.Wrap(err, "failed to get column names")
+		return nil, errors.New("rows not initialized")
 	}
 
 	types, err := rows.ColumnTypes()
 	if err != nil {
-		return nil, nil, errors.Wrap(err, "failed to get column types")
+		return nil, errors.Wrap(err, "failed to get column types")
 	}
 
 	values := make([]interface{}, len(types))
 	for i, t := range types {
-		values[i] = reflect.Zero(t.ScanType()).Addr().Interface()
+		v := reflect.New(t.ScanType()).Interface()
+		switch v.(type) {
+		case *sql.NullInt64:
+			var n int
+			values[i] = &n
+		case *sql.RawBytes:
+			var s string
+			values[i] = &s
+		case sql.Scanner:
+			values[i] = v
+		default:
+			values[i] = v
+		}
 	}
 
-	return columns, values, nil
+	return values, nil
 }

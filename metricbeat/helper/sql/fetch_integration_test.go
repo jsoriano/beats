@@ -85,7 +85,7 @@ func testFetch(t *testing.T, db *sql.DB) {
 		t.Run(c.title, func(t *testing.T) {
 			result, err := Fetch(db, c.query, c.args...)
 			require.NoError(t, err)
-			assert.Equal(t, result, c.expected)
+			assert.Equal(t, c.expected, result)
 		})
 	}
 }
