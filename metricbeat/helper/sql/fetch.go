@@ -18,7 +18,9 @@
 package sql
 
 import (
+	"context"
 	"database/sql"
+	"database/sql/driver"
 	"reflect"
 
 	"github.com/elastic/beats/libbeat/common"
@@ -27,12 +29,12 @@ import (
 )
 
 // FetchWithSchema fetches the result of a query and applies an schema on each row
-func FetchWithSchema(db *sql.DB, schema s.Schema, query string, args ...interface{}) ([]common.MapStr, error) {
+func FetchWithSchema(ctx context.Context, db *sql.DB, schema s.Schema, query string, args ...interface{}) ([]common.MapStr, error) {
 	if schema == nil {
 		return nil, errors.New("nil schema")
 	}
 
-	results, err := Fetch(db, query, args...)
+	results, err := Fetch(ctx, db, query, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +51,7 @@ func FetchWithSchema(db *sql.DB, schema s.Schema, query string, args ...interfac
 }
 
 // Fetch fetches the result of a query
-func Fetch(db *sql.DB, query string, args ...interface{}) ([]map[string]interface{}, error) {
+func Fetch(ctx context.Context, db *sql.DB, query string, args ...interface{}) ([]map[string]interface{}, error) {
 	if db == nil {
 		return nil, errors.New("database not initialized")
 	}
@@ -79,7 +81,10 @@ func Fetch(db *sql.DB, query string, args ...interface{}) ([]map[string]interfac
 
 		row := make(map[string]interface{})
 		for i, column := range columns {
-			row[column] = values[i]
+			v, valid := sqlValueToPlainValue(values[i])
+			if valid {
+				row[column] = v
+			}
 		}
 
 		results = append(results, row)
@@ -101,19 +106,23 @@ func prepareValues(rows *sql.Rows) ([]interface{}, error) {
 	values := make([]interface{}, len(types))
 	for i, t := range types {
 		v := reflect.New(t.ScanType()).Interface()
-		switch v.(type) {
-		case *sql.NullInt64:
-			var n int
-			values[i] = &n
-		case *sql.RawBytes:
-			var s string
-			values[i] = &s
-		case sql.Scanner:
-			values[i] = v
-		default:
-			values[i] = v
-		}
+		values[i] = v
 	}
 
 	return values, nil
+}
+
+// sqlValueToPlainValue converts the sql value to a normal basic type
+func sqlValueToPlainValue(v interface{}) (interface{}, bool) {
+	switch v := v.(type) {
+	case driver.Valuer:
+		value, err := v.Value()
+		return value, err == nil
+	case *sql.RawBytes:
+		if v == nil {
+			return nil, false
+		}
+		return string(*v), true
+	}
+	return v, true
 }

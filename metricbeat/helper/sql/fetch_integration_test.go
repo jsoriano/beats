@@ -20,6 +20,7 @@
 package sql
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"math/rand"
@@ -49,14 +50,8 @@ func TestFetchWithMySQL(t *testing.T) {
 }
 
 func testFetch(t *testing.T, db *sql.DB) {
-	dbName := fmt.Sprintf("testdb%d", rand.Uint64())
-	tableName := fmt.Sprintf("%s.%s", dbName, "test")
-	defer db.Exec(fmt.Sprintf("DROP DATABASE %s", dbName))
-	_, err := db.Exec(fmt.Sprintf("CREATE DATABASE %s", dbName))
-	require.NoError(t, err)
-	_, err = db.Exec(fmt.Sprintf("CREATE TABLE %s (a1 integer, a2 varchar(10))", tableName))
-	require.NoError(t, err)
-	_, err = db.Exec(fmt.Sprintf("INSERT INTO %s VALUES (0, 'foo'), (1, 'bar')", tableName))
+	tableName, drop, err := loadData(db)
+	defer drop()
 	require.NoError(t, err)
 
 	cases := []struct {
@@ -70,12 +65,16 @@ func testFetch(t *testing.T, db *sql.DB) {
 			query: fmt.Sprintf("SELECT * FROM %s", tableName),
 			expected: []map[string]interface{}{
 				{
-					"a1": 0,
+					"a1": int64(0),
 					"a2": "foo",
 				},
 				{
-					"a1": 1,
+					"a1": int64(1),
 					"a2": "bar",
+				},
+				{
+					"a1": int64(2),
+					"a2": "",
 				},
 			},
 		},
@@ -83,9 +82,31 @@ func testFetch(t *testing.T, db *sql.DB) {
 
 	for _, c := range cases {
 		t.Run(c.title, func(t *testing.T) {
-			result, err := Fetch(db, c.query, c.args...)
+			ctx := context.Background()
+			result, err := Fetch(ctx, db, c.query, c.args...)
 			require.NoError(t, err)
 			assert.Equal(t, c.expected, result)
 		})
 	}
+}
+
+func loadData(db *sql.DB) (tableName string, drop func(), err error) {
+	dbName := fmt.Sprintf("testdb%d", rand.Uint64())
+	tableName = fmt.Sprintf("%s.%s", dbName, "test")
+	drop = func() { db.Exec(fmt.Sprintf("DROP DATABASE %s", dbName)) }
+
+	_, err = db.Exec(fmt.Sprintf("CREATE DATABASE %s", dbName))
+	if err != nil {
+		return
+	}
+	_, err = db.Exec(fmt.Sprintf("CREATE TABLE %s (a1 integer, a2 varchar(10))", tableName))
+	if err != nil {
+		return
+	}
+	_, err = db.Exec(fmt.Sprintf("INSERT INTO %s VALUES (0, 'foo'), (1, 'bar'), (2, NULL)", tableName))
+	if err != nil {
+		return
+	}
+
+	return
 }
