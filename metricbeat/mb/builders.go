@@ -19,6 +19,8 @@ package mb
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/gofrs/uuid"
@@ -118,7 +120,7 @@ func initMetricSets(r *Register, m Module) ([]MetricSet, error) {
 	}
 
 	for _, bm := range bms {
-		registration, err := r.metricSetRegistration(bm.Module().Name(), bm.Name())
+		registration, err := metricSetRegistration(r, bm.Module().Name(), bm.Name())
 		if err != nil {
 			errs = append(errs, err)
 			continue
@@ -152,6 +154,109 @@ func initMetricSets(r *Register, m Module) ([]MetricSet, error) {
 	}
 
 	return metricsets, errs.Err()
+}
+
+// metricSetRegistration gets the registration of a metricset in the registry
+// if the metricset cannot be loaded from the registry, it tries to load it from
+// the light modules path
+// FIXME: Move this code to its own file, split in functions
+func metricSetRegistration(r *Register, module, metricset string) (MetricSetRegistration, error) {
+	if r.Contains(module) {
+		return r.metricSetRegistration(module, metricset)
+	}
+
+	// FIXME: Make this an option
+	lightModulesPath := "module"
+	registration, found, err := loadLightMetricSet(r, lightModulesPath, module, metricset)
+	if !found {
+		return MetricSetRegistration{}, fmt.Errorf("metricset '%s/%s' is not registered, metricset not found", module, metricset)
+	}
+
+	return registration, err
+}
+
+func loadLightMetricSet(r *Register, path, module, metricset string) (MetricSetRegistration, bool, error) {
+	modulePath := filepath.Join(path, module, "module.yml")
+	if _, err := os.Stat(modulePath); os.IsNotExist(err) {
+		return MetricSetRegistration{}, false, nil
+	}
+
+	c, err := common.LoadFile(modulePath)
+	if err != nil {
+		return MetricSetRegistration{}, true, errors.Wrap(err, "failed to load light module definition")
+	}
+
+	// FIXME: Proper struct definitions
+	moduleConfig := struct {
+		Metricsets []string `config:"metricsets"`
+	}{}
+	err = c.Unpack(&moduleConfig)
+	if err != nil {
+		return MetricSetRegistration{}, true, errors.Wrap(err, "failed to load light module definition")
+	}
+
+	found := false
+	for _, ms := range moduleConfig.Metricsets {
+		found = ms == metricset
+		if found {
+			break
+		}
+	}
+	if !found {
+		return MetricSetRegistration{}, true, errors.Wrapf(err, "metricset %s not defined in light module %s", metricset, module)
+	}
+
+	manifestPath := filepath.Join(path, module, metricset, "manifest.yml")
+	c, err = common.LoadFile(manifestPath)
+	if err != nil {
+		return MetricSetRegistration{}, true, errors.Wrap(err, "failed to load light module definition")
+	}
+
+	// FIXME: Proper struct definitions
+	manifest := struct {
+		// TODO: Support default metricsets?
+		Default bool
+		Input   struct {
+			Module    string      `config:"module" validate:"required"`
+			Metricset string      `config:"metricset" validate:"required"`
+			Config    interface{} `config:"config"`
+		} `config:"input"`
+	}{}
+	err = c.Unpack(&manifest)
+	if err != nil {
+		return MetricSetRegistration{}, true, errors.Wrap(err, "failed to load light metricset manifest")
+	}
+
+	registration, err := r.metricSetRegistration(manifest.Input.Module, manifest.Input.Metricset)
+	if err != nil {
+		return MetricSetRegistration{}, true, errors.Wrapf(err,
+			"failed to start light metricset %s/%s using %s/%s module as input",
+			module, metricset,
+			manifest.Input.Module, manifest.Input.Metricset)
+	}
+
+	originalFactory := registration.Factory
+	registration.IsDefault = manifest.Default
+
+	registration.Factory = func(base BaseMetricSet) (MetricSet, error) {
+		baseModule := base.module.(*BaseModule)
+		baseModule.name = module
+		baseModule.rawConfig.Merge(manifest.Input.Config)
+		base.name = metricset
+
+		// FIXME: Host parser should be run once registration overrides are done
+		if registration.HostParser != nil {
+			base.hostData, err = registration.HostParser(baseModule, base.host)
+			if err != nil {
+				panic("foo")
+			}
+			base.host = base.hostData.Host
+		}
+
+		return originalFactory(base)
+	}
+
+	return registration, true, nil
 }
 
 // newBaseMetricSets creates a new BaseMetricSet for all MetricSets defined

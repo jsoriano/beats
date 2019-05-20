@@ -274,6 +274,15 @@ func (r *Register) Modules() []string {
 	return modules
 }
 
+// ContainsModule returns true if the module is registered
+func (r *Register) Contains(module string) bool {
+	r.lock.RLock()
+	defer r.lock.RUnlock()
+
+	_, found := r.metricSets[strings.ToLower(module)]
+	return found
+}
+
 // MetricSets returns the list of MetricSets registered for a given module
 func (r *Register) MetricSets(module string) []string {
 	r.lock.RLock()
