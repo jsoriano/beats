@@ -1,0 +1,5 @@
+input:
+  module: prometheus
+  metricset: collector
+  config:
+    metrics_path: /_status/vars

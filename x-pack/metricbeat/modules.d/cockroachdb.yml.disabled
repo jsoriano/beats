@@ -1,0 +1,4 @@
+- module: cockroachdb
+  metricsets: ["stats"]
+  period: 10s
+  hosts: ["localhost:8080"]
