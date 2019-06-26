@@ -5,6 +5,1690 @@
     CockroachDB module
   settings: ["ssl", "http"]
   fields:
-    - name: cockroachdb
-      type: group
-      fields:
+  - name: prometheus.metrics.addsstable_applications
+    type: double
+    description: >
+      Number of SSTable ingestions applied (i.e. applied by Replicas)
+  - name: prometheus.metrics.addsstable_copies
+    type: double
+    description: >
+      number of SSTable ingestions that required copying files during application
+  - name: prometheus.metrics.addsstable_proposals
+    type: double
+    description: >
+      Number of SSTable ingestions proposed (i.e. sent to Raft by lease holders)
+  - name: prometheus.metrics.build_timestamp
+    type: double
+    description: >
+      Build information
+  - name: prometheus.metrics.capacity
+    type: double
+    description: >
+      Total storage capacity
+  - name: prometheus.metrics.capacity_available
+    type: double
+    description: >
+      Available storage capacity
+  - name: prometheus.metrics.capacity_reserved
+    type: double
+    description: >
+      Capacity reserved for snapshots
+  - name: prometheus.metrics.capacity_used
+    type: double
+    description: >
+      Used storage capacity
+  - name: prometheus.metrics.changefeed_buffer_entries_in
+    type: double
+    description: >
+      Total entries entering the buffer between raft and changefeed sinks
+  - name: prometheus.metrics.changefeed_buffer_entries_out
+    type: double
+    description: >
+      Total entries leaving the buffer between raft and changefeed sinks
+  - name: prometheus.metrics.changefeed_emit_nanos
+    type: double
+    description: >
+      Total time spent emitting all feeds
+  - name: prometheus.metrics.changefeed_emitted_bytes
+    type: double
+    description: >
+      Bytes emitted by all feeds
+  - name: prometheus.metrics.changefeed_emitted_messages
+    type: double
+    description: >
+      Messages emitted by all feeds
+  - name: prometheus.metrics.changefeed_error_retries
+    type: double
+    description: >
+      Total retryable errors encountered by all changefeeds
+  - name: prometheus.metrics.changefeed_flush_nanos
+    type: double
+    description: >
+      Total time spent flushing all feeds
+  - name: prometheus.metrics.changefeed_flushes
+    type: double
+    description: >
+      Total flushes across all feeds
+  - name: prometheus.metrics.changefeed_max_behind_nanos
+    type: double
+    description: >
+      Largest commit-to-emit duration of any running feed
+  - name: prometheus.metrics.changefeed_min_high_water
+    type: double
+    description: >
+      Latest high-water timestamp of most behind feed
+  - name: prometheus.metrics.changefeed_poll_request_nanos_bucket
+    type: double
+    description: >
+      Time spent fetching changes
+  - name: prometheus.metrics.changefeed_poll_request_nanos_sum
+    type: double
+    description: >
+      Sum of Time spent fetching changes
+  - name: prometheus.metrics.changefeed_poll_request_nanos_count
+    type: double
+    description: >
+      Count of Time spent fetching changes
+  - name: prometheus.metrics.changefeed_processing_nanos
+    type: double
+    description: >
+      Time spent processing KV changes into SQL rows
+  - name: prometheus.metrics.changefeed_table_metadata_nanos
+    type: double
+    description: >
+      Time blocked while verifying table metadata histories
+  - name: prometheus.metrics.clock_offset_meannanos
+    type: double
+    description: >
+      Mean clock offset with other nodes
+  - name: prometheus.metrics.clock_offset_stddevnanos
+    type: double
+    description: >
+      Stddev clock offset with other nodes
+  - name: prometheus.metrics.compactor_compactingnanos
+    type: double
+    description: >
+      Number of nanoseconds spent compacting ranges
+  - name: prometheus.metrics.compactor_compactions_failure
+    type: double
+    description: >
+      Number of failed compaction requests sent to the storage engine
+  - name: prometheus.metrics.compactor_compactions_success
+    type: double
+    description: >
+      Number of successful compaction requests sent to the storage engine
+  - name: prometheus.metrics.compactor_suggestionbytes_compacted
+    type: double
+    description: >
+      Number of logical bytes compacted from suggested compactions
+  - name: prometheus.metrics.compactor_suggestionbytes_queued
+    type: double
+    description: >
+      Number of logical bytes in suggested compactions in the queue
+  - name: prometheus.metrics.compactor_suggestionbytes_skipped
+    type: double
+    description: >
+      Number of logical bytes in suggested compactions which were not compacted
+  - name: prometheus.metrics.distsender_batches
+    type: double
+    description: >
+      Number of batches processed
+  - name: prometheus.metrics.distsender_batches_async_sent
+    type: double
+    description: >
+      Number of partial batches sent asynchronously
+  - name: prometheus.metrics.distsender_batches_async_throttled
+    type: double
+    description: >
+      Number of partial batches not sent asynchronously due to throttling
+  - name: prometheus.metrics.distsender_batches_partial
+    type: double
+    description: >
+      Number of partial batches processed after being divided on range boundaries
+  - name: prometheus.metrics.distsender_errors_inleasetransferbackoffs
+    type: double
+    description: >
+      Number of times backed off due to NotLeaseHolderErrors during lease transfer.
+  - name: prometheus.metrics.distsender_errors_notleaseholder
+    type: double
+    description: >
+      Number of NotLeaseHolderErrors encountered
+  - name: prometheus.metrics.distsender_rpc_sent
+    type: double
+    description: >
+      Number of RPCs sent
+  - name: prometheus.metrics.distsender_rpc_sent_local
+    type: double
+    description: >
+      Number of local RPCs sent
+  - name: prometheus.metrics.distsender_rpc_sent_nextreplicaerror
+    type: double
+    description: >
+      Number of RPCs sent due to per-replica errors
+  - name: prometheus.metrics.exec_error
+    type: double
+    description: >
+      Number of batch KV requests that failed to execute on this node
+  - name: prometheus.metrics.exec_latency_bucket
+    type: double
+    description: >
+      Latency of batch KV requests executed on this node
+  - name: prometheus.metrics.exec_latency_sum
+    type: double
+    description: >
+      Sum of Latency of batch KV requests executed on this node
+  - name: prometheus.metrics.exec_latency_count
+    type: double
+    description: >
+      Count of Latency of batch KV requests executed on this node
+  - name: prometheus.metrics.exec_success
+    type: double
+    description: >
+      Number of batch KV requests executed successfully on this node
+  - name: prometheus.metrics.follower_reads_success_count
+    type: double
+    description: >
+      Number of reads successfully processed by any replica
+  - name: prometheus.metrics.gcbytesage
+    type: double
+    description: >
+      Cumulative age of non-live data
+  - name: prometheus.metrics.gossip_bytes_received
+    type: double
+    description: >
+      Number of received gossip bytes
+  - name: prometheus.metrics.gossip_bytes_sent
+    type: double
+    description: >
+      Number of sent gossip bytes
+  - name: prometheus.metrics.gossip_connections_incoming
+    type: double
+    description: >
+      Number of active incoming gossip connections
+  - name: prometheus.metrics.gossip_connections_outgoing
+    type: double
+    description: >
+      Number of active outgoing gossip connections
+  - name: prometheus.metrics.gossip_connections_refused
+    type: double
+    description: >
+      Number of refused incoming gossip connections
+  - name: prometheus.metrics.gossip_infos_received
+    type: double
+    description: >
+      Number of received gossip Info objects
+  - name: prometheus.metrics.gossip_infos_sent
+    type: double
+    description: >
+      Number of sent gossip Info objects
+  - name: prometheus.metrics.intentage
+    type: double
+    description: >
+      Cumulative age of intents
+  - name: prometheus.metrics.intentbytes
+    type: double
+    description: >
+      Number of bytes in intent KV pairs
+  - name: prometheus.metrics.intentcount
+    type: double
+    description: >
+      Count of intent keys
+  - name: prometheus.metrics.intentresolver_async_throttled
+    type: double
+    description: >
+      Number of intent resolution attempts not run asynchronously due to throttling
+  - name: prometheus.metrics.intents_abort_attempts
+    type: double
+    description: >
+      Count of (point or range) non-poisoning intent abort evaluation attempts
+  - name: prometheus.metrics.intents_poison_attempts
+    type: double
+    description: >
+      Count of (point or range) poisoning intent abort evaluation attempts
+  - name: prometheus.metrics.intents_resolve_attempts
+    type: double
+    description: >
+      Count of (point or range) intent commit evaluation attempts
+  - name: prometheus.metrics.keybytes
+    type: double
+    description: >
+      Number of bytes taken up by keys
+  - name: prometheus.metrics.keycount
+    type: double
+    description: >
+      Count of all keys
+  - name: prometheus.metrics.kv_closed_timestamp_max_behind_nanos
+    type: double
+    description: >
+      Largest latency between realtime and replica max closed timestamp
+  - name: prometheus.metrics.kv_rangefeed_catchup_scan_nanos
+    type: double
+    description: >
+      Time spent in RangeFeed catchup scan
+  - name: prometheus.metrics.lastupdatenanos
+    type: double
+    description: >
+      Timestamp at which bytes/keys/intents metrics were last updated
+  - name: prometheus.metrics.leases_epoch
+    type: double
+    description: >
+      Number of replica leaseholders using epoch-based leases
+  - name: prometheus.metrics.leases_error
+    type: double
+    description: >
+      Number of failed lease requests
+  - name: prometheus.metrics.leases_expiration
+    type: double
+    description: >
+      Number of replica leaseholders using expiration-based leases
+  - name: prometheus.metrics.leases_success
+    type: double
+    description: >
+      Number of successful lease requests
+  - name: prometheus.metrics.leases_transfers_error
+    type: double
+    description: >
+      Number of failed lease transfers
+  - name: prometheus.metrics.leases_transfers_success
+    type: double
+    description: >
+      Number of successful lease transfers
+  - name: prometheus.metrics.livebytes
+    type: double
+    description: >
+      Number of bytes of live data (keys plus values)
+  - name: prometheus.metrics.livecount
+    type: double
+    description: >
+      Count of live keys
+  - name: prometheus.metrics.liveness_epochincrements
+    type: double
+    description: >
+      Number of times this node has incremented its liveness epoch
+  - name: prometheus.metrics.liveness_heartbeatfailures
+    type: double
+    description: >
+      Number of failed node liveness heartbeats from this node
+  - name: prometheus.metrics.liveness_heartbeatlatency_bucket
+    type: double
+    description: >
+      Node liveness heartbeat latency
+  - name: prometheus.metrics.liveness_heartbeatlatency_sum
+    type: double
+    description: >
+      Sum of Node liveness heartbeat latency
+  - name: prometheus.metrics.liveness_heartbeatlatency_count
+    type: double
+    description: >
+      Count of Node liveness heartbeat latency
+  - name: prometheus.metrics.liveness_heartbeatsuccesses
+    type: double
+    description: >
+      Number of successful node liveness heartbeats from this node
+  - name: prometheus.metrics.liveness_livenodes
+    type: double
+    description: >
+      Number of live nodes in the cluster (will be 0 if this node is not itself live)
+  - name: prometheus.metrics.node_id
+    type: double
+    description: >
+      node ID with labels for advertised RPC and HTTP addresses
+  - name: prometheus.metrics.queue_consistency_pending
+    type: double
+    description: >
+      Number of pending replicas in the consistency checker queue
+  - name: prometheus.metrics.queue_consistency_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the consistency checker queue
+  - name: prometheus.metrics.queue_consistency_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the consistency checker queue
+  - name: prometheus.metrics.queue_consistency_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the consistency checker queue
+  - name: prometheus.metrics.queue_gc_info_abortspanconsidered
+    type: double
+    description: >
+      Number of AbortSpan entries old enough to be considered for removal
+  - name: prometheus.metrics.queue_gc_info_abortspangcnum
+    type: double
+    description: >
+      Number of AbortSpan entries fit for removal
+  - name: prometheus.metrics.queue_gc_info_abortspanscanned
+    type: double
+    description: >
+      Number of transactions present in the AbortSpan scanned from the engine
+  - name: prometheus.metrics.queue_gc_info_intentsconsidered
+    type: double
+    description: >
+      Number of 'old' intents
+  - name: prometheus.metrics.queue_gc_info_intenttxns
+    type: double
+    description: >
+      Number of associated distinct transactions
+  - name: prometheus.metrics.queue_gc_info_numkeysaffected
+    type: double
+    description: >
+      Number of keys with GC'able data
+  - name: prometheus.metrics.queue_gc_info_pushtxn
+    type: double
+    description: >
+      Number of attempted pushes
+  - name: prometheus.metrics.queue_gc_info_resolvesuccess
+    type: double
+    description: >
+      Number of successful intent resolutions
+  - name: prometheus.metrics.queue_gc_info_resolvetotal
+    type: double
+    description: >
+      Number of attempted intent resolutions
+  - name: prometheus.metrics.queue_gc_info_transactionspangcaborted
+    type: double
+    description: >
+      Number of GC'able entries corresponding to aborted txns
+  - name: prometheus.metrics.queue_gc_info_transactionspangccommitted
+    type: double
+    description: >
+      Number of GC'able entries corresponding to committed txns
+  - name: prometheus.metrics.queue_gc_info_transactionspangcpending
+    type: double
+    description: >
+      Number of GC'able entries corresponding to pending txns
+  - name: prometheus.metrics.queue_gc_info_transactionspanscanned
+    type: double
+    description: >
+      Number of entries in transaction spans scanned from the engine
+  - name: prometheus.metrics.queue_gc_pending
+    type: double
+    description: >
+      Number of pending replicas in the GC queue
+  - name: prometheus.metrics.queue_gc_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the GC queue
+  - name: prometheus.metrics.queue_gc_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the GC queue
+  - name: prometheus.metrics.queue_gc_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the GC queue
+  - name: prometheus.metrics.queue_merge_pending
+    type: double
+    description: >
+      Number of pending replicas in the merge queue
+  - name: prometheus.metrics.queue_merge_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the merge queue
+  - name: prometheus.metrics.queue_merge_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the merge queue
+  - name: prometheus.metrics.queue_merge_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the merge queue
+  - name: prometheus.metrics.queue_merge_purgatory
+    type: double
+    description: >
+      Number of replicas in the merge queue's purgatory, waiting to become mergeable
+  - name: prometheus.metrics.queue_raftlog_pending
+    type: double
+    description: >
+      Number of pending replicas in the Raft log queue
+  - name: prometheus.metrics.queue_raftlog_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the Raft log queue
+  - name: prometheus.metrics.queue_raftlog_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the Raft log queue
+  - name: prometheus.metrics.queue_raftlog_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the Raft log queue
+  - name: prometheus.metrics.queue_raftsnapshot_pending
+    type: double
+    description: >
+      Number of pending replicas in the Raft repair queue
+  - name: prometheus.metrics.queue_raftsnapshot_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the Raft repair queue
+  - name: prometheus.metrics.queue_raftsnapshot_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the Raft repair queue
+  - name: prometheus.metrics.queue_raftsnapshot_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the Raft repair queue
+  - name: prometheus.metrics.queue_replicagc_pending
+    type: double
+    description: >
+      Number of pending replicas in the replica GC queue
+  - name: prometheus.metrics.queue_replicagc_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the replica GC queue
+  - name: prometheus.metrics.queue_replicagc_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the replica GC queue
+  - name: prometheus.metrics.queue_replicagc_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the replica GC queue
+  - name: prometheus.metrics.queue_replicagc_removereplica
+    type: double
+    description: >
+      Number of replica removals attempted by the replica gc queue
+  - name: prometheus.metrics.queue_replicate_addreplica
+    type: double
+    description: >
+      Number of replica additions attempted by the replicate queue
+  - name: prometheus.metrics.queue_replicate_pending
+    type: double
+    description: >
+      Number of pending replicas in the replicate queue
+  - name: prometheus.metrics.queue_replicate_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the replicate queue
+  - name: prometheus.metrics.queue_replicate_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the replicate queue
+  - name: prometheus.metrics.queue_replicate_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the replicate queue
+  - name: prometheus.metrics.queue_replicate_purgatory
+    type: double
+    description: >
+      Number of replicas in the replicate queue's purgatory, awaiting allocation options
+  - name: prometheus.metrics.queue_replicate_rebalancereplica
+    type: double
+    description: >
+      Number of replica rebalancer-initiated additions attempted by the replicate queue
+  - name: prometheus.metrics.queue_replicate_removedeadreplica
+    type: double
+    description: >
+      Number of dead replica removals attempted by the replicate queue (typically in response to a node outage)
+  - name: prometheus.metrics.queue_replicate_removereplica
+    type: double
+    description: >
+      Number of replica removals attempted by the replicate queue (typically in response to a rebalancer-initiated addition)
+  - name: prometheus.metrics.queue_replicate_transferlease
+    type: double
+    description: >
+      Number of range lease transfers attempted by the replicate queue
+  - name: prometheus.metrics.queue_split_pending
+    type: double
+    description: >
+      Number of pending replicas in the split queue
+  - name: prometheus.metrics.queue_split_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the split queue
+  - name: prometheus.metrics.queue_split_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the split queue
+  - name: prometheus.metrics.queue_split_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the split queue
+  - name: prometheus.metrics.queue_split_purgatory
+    type: double
+    description: >
+      Number of replicas in the split queue's purgatory, waiting to become splittable
+  - name: prometheus.metrics.queue_tsmaintenance_pending
+    type: double
+    description: >
+      Number of pending replicas in the time series maintenance queue
+  - name: prometheus.metrics.queue_tsmaintenance_process_failure
+    type: double
+    description: >
+      Number of replicas which failed processing in the time series maintenance queue
+  - name: prometheus.metrics.queue_tsmaintenance_process_success
+    type: double
+    description: >
+      Number of replicas successfully processed by the time series maintenance queue
+  - name: prometheus.metrics.queue_tsmaintenance_processingnanos
+    type: double
+    description: >
+      Nanoseconds spent processing replicas in the time series maintenance queue
+  - name: prometheus.metrics.raft_commandsapplied
+    type: double
+    description: >
+      Count of Raft commands applied
+  - name: prometheus.metrics.raft_enqueued_pending
+    type: double
+    description: >
+      Number of pending outgoing messages in the Raft Transport queue
+  - name: prometheus.metrics.raft_entrycache_accesses
+    type: double
+    description: >
+      Number of cache lookups in the Raft entry cache
+  - name: prometheus.metrics.raft_entrycache_bytes
+    type: double
+    description: >
+      Aggregate size of all Raft entries in the Raft entry cache
+  - name: prometheus.metrics.raft_entrycache_hits
+    type: double
+    description: >
+      Number of successful cache lookups in the Raft entry cache
+  - name: prometheus.metrics.raft_entrycache_size
+    type: double
+    description: >
+      Number of Raft entries in the Raft entry cache
+  - name: prometheus.metrics.raft_heartbeats_pending
+    type: double
+    description: >
+      Number of pending heartbeats and responses waiting to be coalesced
+  - name: prometheus.metrics.raft_process_applycommitted_latency_bucket
+    type: double
+    description: >
+      Latency histogram for applying all committed Raft commands in a Raft ready
+  - name: prometheus.metrics.raft_process_applycommitted_latency_sum
+    type: double
+    description: >
+      Sum of Latency histogram for applying all committed Raft commands in a Raft ready
+  - name: prometheus.metrics.raft_process_applycommitted_latency_count
+    type: double
+    description: >
+      Count of Latency histogram for applying all committed Raft commands in a Raft ready
+  - name: prometheus.metrics.raft_process_commandcommit_latency_bucket
+    type: double
+    description: >
+      Latency histogram for committing Raft commands
+  - name: prometheus.metrics.raft_process_commandcommit_latency_sum
+    type: double
+    description: >
+      Sum of Latency histogram for committing Raft commands
+  - name: prometheus.metrics.raft_process_commandcommit_latency_count
+    type: double
+    description: >
+      Count of Latency histogram for committing Raft commands
+  - name: prometheus.metrics.raft_process_handleready_latency_bucket
+    type: double
+    description: >
+      Latency histogram for handling a Raft ready
+  - name: prometheus.metrics.raft_process_handleready_latency_sum
+    type: double
+    description: >
+      Sum of Latency histogram for handling a Raft ready
+  - name: prometheus.metrics.raft_process_handleready_latency_count
+    type: double
+    description: >
+      Count of Latency histogram for handling a Raft ready
+  - name: prometheus.metrics.raft_process_logcommit_latency_bucket
+    type: double
+    description: >
+      Latency histogram for committing Raft log entries
+  - name: prometheus.metrics.raft_process_logcommit_latency_sum
+    type: double
+    description: >
+      Sum of Latency histogram for committing Raft log entries
+  - name: prometheus.metrics.raft_process_logcommit_latency_count
+    type: double
+    description: >
+      Count of Latency histogram for committing Raft log entries
+  - name: prometheus.metrics.raft_process_tickingnanos
+    type: double
+    description: >
+      Nanoseconds spent in store.processRaft() processing replica.Tick()
+  - name: prometheus.metrics.raft_process_workingnanos
+    type: double
+    description: >
+      Nanoseconds spent in store.processRaft() working
+  - name: prometheus.metrics.raft_rcvd_app
+    type: double
+    description: >
+      Number of MsgApp messages received by this store
+  - name: prometheus.metrics.raft_rcvd_appresp
+    type: double
+    description: >
+      Number of MsgAppResp messages received by this store
+  - name: prometheus.metrics.raft_rcvd_dropped
+    type: double
+    description: >
+      Number of dropped incoming Raft messages
+  - name: prometheus.metrics.raft_rcvd_heartbeat
+    type: double
+    description: >
+      Number of (coalesced, if enabled) MsgHeartbeat messages received by this store
+  - name: prometheus.metrics.raft_rcvd_heartbeatresp
+    type: double
+    description: >
+      Number of (coalesced, if enabled) MsgHeartbeatResp messages received by this store
+  - name: prometheus.metrics.raft_rcvd_prevote
+    type: double
+    description: >
+      Number of MsgPreVote messages received by this store
+  - name: prometheus.metrics.raft_rcvd_prevoteresp
+    type: double
+    description: >
+      Number of MsgPreVoteResp messages received by this store
+  - name: prometheus.metrics.raft_rcvd_prop
+    type: double
+    description: >
+      Number of MsgProp messages received by this store
+  - name: prometheus.metrics.raft_rcvd_snap
+    type: double
+    description: >
+      Number of MsgSnap messages received by this store
+  - name: prometheus.metrics.raft_rcvd_timeoutnow
+    type: double
+    description: >
+      Number of MsgTimeoutNow messages received by this store
+  - name: prometheus.metrics.raft_rcvd_transferleader
+    type: double
+    description: >
+      Number of MsgTransferLeader messages received by this store
+  - name: prometheus.metrics.raft_rcvd_vote
+    type: double
+    description: >
+      Number of MsgVote messages received by this store
+  - name: prometheus.metrics.raft_rcvd_voteresp
+    type: double
+    description: >
+      Number of MsgVoteResp messages received by this store
+  - name: prometheus.metrics.raft_ticks
+    type: double
+    description: >
+      Number of Raft ticks queued
+  - name: prometheus.metrics.raftlog_behind
+    type: double
+    description: >
+      Number of Raft log entries followers on other stores are behind
+  - name: prometheus.metrics.raftlog_truncated
+    type: double
+    description: >
+      Number of Raft log entries truncated
+  - name: prometheus.metrics.range_adds
+    type: double
+    description: >
+      Number of range additions
+  - name: prometheus.metrics.range_merges
+    type: double
+    description: >
+      Number of range merges
+  - name: prometheus.metrics.range_raftleadertransfers
+    type: double
+    description: >
+      Number of raft leader transfers
+  - name: prometheus.metrics.range_removes
+    type: double
+    description: >
+      Number of range removals
+  - name: prometheus.metrics.range_snapshots_generated
+    type: double
+    description: >
+      Number of generated snapshots
+  - name: prometheus.metrics.range_snapshots_normal_applied
+    type: double
+    description: >
+      Number of applied snapshots
+  - name: prometheus.metrics.range_snapshots_preemptive_applied
+    type: double
+    description: >
+      Number of applied pre-emptive snapshots
+  - name: prometheus.metrics.range_splits
+    type: double
+    description: >
+      Number of range splits
+  - name: prometheus.metrics.ranges
+    type: double
+    description: >
+      Number of ranges
+  - name: prometheus.metrics.ranges_overreplicated
+    type: double
+    description: >
+      Number of ranges with more live replicas than the replication target
+  - name: prometheus.metrics.ranges_unavailable
+    type: double
+    description: >
+      Number of ranges with fewer live replicas than needed for quorum
+  - name: prometheus.metrics.ranges_underreplicated
+    type: double
+    description: >
+      Number of ranges with fewer live replicas than the replication target
+  - name: prometheus.metrics.rebalancing_lease_transfers
+    type: double
+    description: >
+      Number of lease transfers motivated by store-level load imbalances
+  - name: prometheus.metrics.rebalancing_queriespersecond
+    type: double
+    description: >
+      Number of kv-level requests received per second by the store, averaged over a large time period as used in rebalancing decisions
+  - name: prometheus.metrics.rebalancing_range_rebalances
+    type: double
+    description: >
+      Number of range rebalance operations motivated by store-level load imbalances
+  - name: prometheus.metrics.rebalancing_writespersecond
+    type: double
+    description: >
+      Number of keys written (i.e. applied by raft) per second to the store, averaged over a large time period as used in rebalancing decisions
+  - name: prometheus.metrics.replicas
+    type: double
+    description: >
+      Number of replicas
+  - name: prometheus.metrics.replicas_leaders
+    type: double
+    description: >
+      Number of raft leaders
+  - name: prometheus.metrics.replicas_leaders_not_leaseholders
+    type: double
+    description: >
+      Number of replicas that are Raft leaders whose range lease is held by another store
+  - name: prometheus.metrics.replicas_leaseholders
+    type: double
+    description: >
+      Number of lease holders
+  - name: prometheus.metrics.replicas_quiescent
+    type: double
+    description: >
+      Number of quiesced replicas
+  - name: prometheus.metrics.replicas_reserved
+    type: double
+    description: >
+      Number of replicas reserved for snapshots
+  - name: prometheus.metrics.requests_backpressure_split
+    type: double
+    description: >
+      Number of backpressured writes waiting on a Range split
+  - name: prometheus.metrics.requests_slow_latch
+    type: double
+    description: >
+      Number of requests that have been stuck for a long time acquiring latches
+  - name: prometheus.metrics.requests_slow_lease
+    type: double
+    description: >
+      Number of requests that have been stuck for a long time acquiring a lease
+  - name: prometheus.metrics.requests_slow_raft
+    type: double
+    description: >
+      Number of requests that have been stuck for a long time in raft
+  - name: prometheus.metrics.rocksdb_block_cache_hits
+    type: double
+    description: >
+      Count of block cache hits
+  - name: prometheus.metrics.rocksdb_block_cache_misses
+    type: double
+    description: >
+      Count of block cache misses
+  - name: prometheus.metrics.rocksdb_block_cache_pinned_usage
+    type: double
+    description: >
+      Bytes pinned by the block cache
+  - name: prometheus.metrics.rocksdb_block_cache_usage
+    type: double
+    description: >
+      Bytes used by the block cache
+  - name: prometheus.metrics.rocksdb_bloom_filter_prefix_checked
+    type: double
+    description: >
+      Number of times the bloom filter was checked
+  - name: prometheus.metrics.rocksdb_bloom_filter_prefix_useful
+    type: double
+    description: >
+      Number of times the bloom filter helped avoid iterator creation
+  - name: prometheus.metrics.rocksdb_compactions
+    type: double
+    description: >
+      Number of table compactions
+  - name: prometheus.metrics.rocksdb_encryption_algorithm
+    type: double
+    description: >
+      algorithm in use for encryption-at-rest, see ccl/storageccl/engineccl/enginepbccl/key_registry.proto
+  - name: prometheus.metrics.rocksdb_flushes
+    type: double
+    description: >
+      Number of table flushes
+  - name: prometheus.metrics.rocksdb_memtable_total_size
+    type: double
+    description: >
+      Current size of memtable in bytes
+  - name: prometheus.metrics.rocksdb_num_sstables
+    type: double
+    description: >
+      Number of rocksdb SSTables
+  - name: prometheus.metrics.rocksdb_read_amplification
+    type: double
+    description: >
+      Number of disk reads per query
+  - name: prometheus.metrics.rocksdb_table_readers_mem_estimate
+    type: double
+    description: >
+      Memory used by index and filter blocks
+  - name: prometheus.metrics.round_trip_latency_bucket
+    type: double
+    description: >
+      Distribution of round-trip latencies with other nodes
+  - name: prometheus.metrics.round_trip_latency_sum
+    type: double
+    description: >
+      Sum of Distribution of round-trip latencies with other nodes
+  - name: prometheus.metrics.round_trip_latency_count
+    type: double
+    description: >
+      Count of Distribution of round-trip latencies with other nodes
+  - name: prometheus.metrics.sql_bytesin
+    type: double
+    description: >
+      Number of sql bytes received
+  - name: prometheus.metrics.sql_bytesout
+    type: double
+    description: >
+      Number of sql bytes sent
+  - name: prometheus.metrics.sql_conns
+    type: double
+    description: >
+      Number of active sql connections
+  - name: prometheus.metrics.sql_ddl_count
+    type: double
+    description: >
+      Number of SQL DDL statements
+  - name: prometheus.metrics.sql_ddl_count_internal
+    type: double
+    description: >
+      Number of SQL DDL statements (internal queries)
+  - name: prometheus.metrics.sql_delete_count
+    type: double
+    description: >
+      Number of SQL DELETE statements
+  - name: prometheus.metrics.sql_delete_count_internal
+    type: double
+    description: >
+      Number of SQL DELETE statements (internal queries)
+  - name: prometheus.metrics.sql_distsql_exec_latency_bucket
+    type: double
+    description: >
+      Latency of DistSQL statement execution
+  - name: prometheus.metrics.sql_distsql_exec_latency_sum
+    type: double
+    description: >
+      Sum of Latency of DistSQL statement execution
+  - name: prometheus.metrics.sql_distsql_exec_latency_count
+    type: double
+    description: >
+      Count of Latency of DistSQL statement execution
+  - name: prometheus.metrics.sql_distsql_exec_latency_internal_bucket
+    type: double
+    description: >
+      Latency of DistSQL statement execution (internal queries)
+  - name: prometheus.metrics.sql_distsql_exec_latency_internal_sum
+    type: double
+    description: >
+      Sum of Latency of DistSQL statement execution (internal queries)
+  - name: prometheus.metrics.sql_distsql_exec_latency_internal_count
+    type: double
+    description: >
+      Count of Latency of DistSQL statement execution (internal queries)
+  - name: prometheus.metrics.sql_distsql_flows_active
+    type: double
+    description: >
+      Number of distributed SQL flows currently active
+  - name: prometheus.metrics.sql_distsql_flows_queue_wait_bucket
+    type: double
+    description: >
+      Duration of time flows spend waiting in the queue
+  - name: prometheus.metrics.sql_distsql_flows_queue_wait_sum
+    type: double
+    description: >
+      Sum of Duration of time flows spend waiting in the queue
+  - name: prometheus.metrics.sql_distsql_flows_queue_wait_count
+    type: double
+    description: >
+      Count of Duration of time flows spend waiting in the queue
+  - name: prometheus.metrics.sql_distsql_flows_queued
+    type: double
+    description: >
+      Number of distributed SQL flows currently queued
+  - name: prometheus.metrics.sql_distsql_flows_total
+    type: double
+    description: >
+      Number of distributed SQL flows executed
+  - name: prometheus.metrics.sql_distsql_queries_active
+    type: double
+    description: >
+      Number of distributed SQL queries currently active
+  - name: prometheus.metrics.sql_distsql_queries_total
+    type: double
+    description: >
+      Number of distributed SQL queries executed
+  - name: prometheus.metrics.sql_distsql_select_count
+    type: double
+    description: >
+      Number of DistSQL SELECT statements
+  - name: prometheus.metrics.sql_distsql_select_count_internal
+    type: double
+    description: >
+      Number of DistSQL SELECT statements (internal queries)
+  - name: prometheus.metrics.sql_distsql_service_latency_bucket
+    type: double
+    description: >
+      Latency of DistSQL request execution
+  - name: prometheus.metrics.sql_distsql_service_latency_sum
+    type: double
+    description: >
+      Sum of Latency of DistSQL request execution
+  - name: prometheus.metrics.sql_distsql_service_latency_count
+    type: double
+    description: >
+      Count of Latency of DistSQL request execution
+  - name: prometheus.metrics.sql_distsql_service_latency_internal_bucket
+    type: double
+    description: >
+      Latency of DistSQL request execution (internal queries)
+  - name: prometheus.metrics.sql_distsql_service_latency_internal_sum
+    type: double
+    description: >
+      Sum of Latency of DistSQL request execution (internal queries)
+  - name: prometheus.metrics.sql_distsql_service_latency_internal_count
+    type: double
+    description: >
+      Count of Latency of DistSQL request execution (internal queries)
+  - name: prometheus.metrics.sql_exec_latency_bucket
+    type: double
+    description: >
+      Latency of SQL statement execution
+  - name: prometheus.metrics.sql_exec_latency_sum
+    type: double
+    description: >
+      Sum of Latency of SQL statement execution
+  - name: prometheus.metrics.sql_exec_latency_count
+    type: double
+    description: >
+      Count of Latency of SQL statement execution
+  - name: prometheus.metrics.sql_exec_latency_internal_bucket
+    type: double
+    description: >
+      Latency of SQL statement execution (internal queries)
+  - name: prometheus.metrics.sql_exec_latency_internal_sum
+    type: double
+    description: >
+      Sum of Latency of SQL statement execution (internal queries)
+  - name: prometheus.metrics.sql_exec_latency_internal_count
+    type: double
+    description: >
+      Count of Latency of SQL statement execution (internal queries)
+  - name: prometheus.metrics.sql_failure_count
+    type: double
+    description: >
+      Number of statements resulting in a planning or runtime error
+  - name: prometheus.metrics.sql_failure_count_internal
+    type: double
+    description: >
+      Number of statements resulting in a planning or runtime error (internal queries)
+  - name: prometheus.metrics.sql_insert_count
+    type: double
+    description: >
+      Number of SQL INSERT statements
+  - name: prometheus.metrics.sql_insert_count_internal
+    type: double
+    description: >
+      Number of SQL INSERT statements (internal queries)
+  - name: prometheus.metrics.sql_mem_admin_current
+    type: double
+    description: >
+      Current sql statement memory usage for admin
+  - name: prometheus.metrics.sql_mem_admin_max_bucket
+    type: double
+    description: >
+      Memory usage per sql statement for admin
+  - name: prometheus.metrics.sql_mem_admin_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql statement for admin
+  - name: prometheus.metrics.sql_mem_admin_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql statement for admin
+  - name: prometheus.metrics.sql_mem_admin_session_current
+    type: double
+    description: >
+      Current sql session memory usage for admin
+  - name: prometheus.metrics.sql_mem_admin_session_max_bucket
+    type: double
+    description: >
+      Memory usage per sql session for admin
+  - name: prometheus.metrics.sql_mem_admin_session_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql session for admin
+  - name: prometheus.metrics.sql_mem_admin_session_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql session for admin
+  - name: prometheus.metrics.sql_mem_admin_txn_current
+    type: double
+    description: >
+      Current sql transaction memory usage for admin
+  - name: prometheus.metrics.sql_mem_admin_txn_max_bucket
+    type: double
+    description: >
+      Memory usage per sql transaction for admin
+  - name: prometheus.metrics.sql_mem_admin_txn_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql transaction for admin
+  - name: prometheus.metrics.sql_mem_admin_txn_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql transaction for admin
+  - name: prometheus.metrics.sql_mem_conns_current
+    type: double
+    description: >
+      Current sql statement memory usage for conns
+  - name: prometheus.metrics.sql_mem_conns_max_bucket
+    type: double
+    description: >
+      Memory usage per sql statement for conns
+  - name: prometheus.metrics.sql_mem_conns_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql statement for conns
+  - name: prometheus.metrics.sql_mem_conns_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql statement for conns
+  - name: prometheus.metrics.sql_mem_conns_session_current
+    type: double
+    description: >
+      Current sql session memory usage for conns
+  - name: prometheus.metrics.sql_mem_conns_session_max_bucket
+    type: double
+    description: >
+      Memory usage per sql session for conns
+  - name: prometheus.metrics.sql_mem_conns_session_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql session for conns
+  - name: prometheus.metrics.sql_mem_conns_session_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql session for conns
+  - name: prometheus.metrics.sql_mem_conns_txn_current
+    type: double
+    description: >
+      Current sql transaction memory usage for conns
+  - name: prometheus.metrics.sql_mem_conns_txn_max_bucket
+    type: double
+    description: >
+      Memory usage per sql transaction for conns
+  - name: prometheus.metrics.sql_mem_conns_txn_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql transaction for conns
+  - name: prometheus.metrics.sql_mem_conns_txn_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql transaction for conns
+  - name: prometheus.metrics.sql_mem_distsql_current
+    type: double
+    description: >
+      Current sql statement memory usage for distsql
+  - name: prometheus.metrics.sql_mem_distsql_max_bucket
+    type: double
+    description: >
+      Memory usage per sql statement for distsql
+  - name: prometheus.metrics.sql_mem_distsql_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql statement for distsql
+  - name: prometheus.metrics.sql_mem_distsql_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql statement for distsql
+  - name: prometheus.metrics.sql_mem_internal_current
+    type: double
+    description: >
+      Current sql statement memory usage for internal
+  - name: prometheus.metrics.sql_mem_internal_max_bucket
+    type: double
+    description: >
+      Memory usage per sql statement for internal
+  - name: prometheus.metrics.sql_mem_internal_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql statement for internal
+  - name: prometheus.metrics.sql_mem_internal_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql statement for internal
+  - name: prometheus.metrics.sql_mem_internal_session_current
+    type: double
+    description: >
+      Current sql session memory usage for internal
+  - name: prometheus.metrics.sql_mem_internal_session_max_bucket
+    type: double
+    description: >
+      Memory usage per sql session for internal
+  - name: prometheus.metrics.sql_mem_internal_session_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql session for internal
+  - name: prometheus.metrics.sql_mem_internal_session_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql session for internal
+  - name: prometheus.metrics.sql_mem_internal_txn_current
+    type: double
+    description: >
+      Current sql transaction memory usage for internal
+  - name: prometheus.metrics.sql_mem_internal_txn_max_bucket
+    type: double
+    description: >
+      Memory usage per sql transaction for internal
+  - name: prometheus.metrics.sql_mem_internal_txn_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql transaction for internal
+  - name: prometheus.metrics.sql_mem_internal_txn_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql transaction for internal
+  - name: prometheus.metrics.sql_mem_sql_current
+    type: double
+    description: >
+      Current sql statement memory usage for sql
+  - name: prometheus.metrics.sql_mem_sql_max_bucket
+    type: double
+    description: >
+      Memory usage per sql statement for sql
+  - name: prometheus.metrics.sql_mem_sql_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql statement for sql
+  - name: prometheus.metrics.sql_mem_sql_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql statement for sql
+  - name: prometheus.metrics.sql_mem_sql_session_current
+    type: double
+    description: >
+      Current sql session memory usage for sql
+  - name: prometheus.metrics.sql_mem_sql_session_max_bucket
+    type: double
+    description: >
+      Memory usage per sql session for sql
+  - name: prometheus.metrics.sql_mem_sql_session_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql session for sql
+  - name: prometheus.metrics.sql_mem_sql_session_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql session for sql
+  - name: prometheus.metrics.sql_mem_sql_txn_current
+    type: double
+    description: >
+      Current sql transaction memory usage for sql
+  - name: prometheus.metrics.sql_mem_sql_txn_max_bucket
+    type: double
+    description: >
+      Memory usage per sql transaction for sql
+  - name: prometheus.metrics.sql_mem_sql_txn_max_sum
+    type: double
+    description: >
+      Sum of Memory usage per sql transaction for sql
+  - name: prometheus.metrics.sql_mem_sql_txn_max_count
+    type: double
+    description: >
+      Count of Memory usage per sql transaction for sql
+  - name: prometheus.metrics.sql_misc_count
+    type: double
+    description: >
+      Number of other SQL statements
+  - name: prometheus.metrics.sql_misc_count_internal
+    type: double
+    description: >
+      Number of other SQL statements (internal queries)
+  - name: prometheus.metrics.sql_optimizer_count
+    type: double
+    description: >
+      Number of statements which ran with the cost-based optimizer
+  - name: prometheus.metrics.sql_optimizer_count_internal
+    type: double
+    description: >
+      Number of statements which ran with the cost-based optimizer (internal queries)
+  - name: prometheus.metrics.sql_optimizer_fallback_count
+    type: double
+    description: >
+      Number of statements which the cost-based optimizer was unable to plan
+  - name: prometheus.metrics.sql_optimizer_fallback_count_internal
+    type: double
+    description: >
+      Number of statements which the cost-based optimizer was unable to plan (internal queries)
+  - name: prometheus.metrics.sql_optimizer_plan_cache_hits
+    type: double
+    description: >
+      Number of non-prepared statements for which a cached plan was used
+  - name: prometheus.metrics.sql_optimizer_plan_cache_hits_internal
+    type: double
+    description: >
+      Number of non-prepared statements for which a cached plan was used (internal queries)
+  - name: prometheus.metrics.sql_optimizer_plan_cache_misses
+    type: double
+    description: >
+      Number of non-prepared statements for which a cached plan was not used
+  - name: prometheus.metrics.sql_optimizer_plan_cache_misses_internal
+    type: double
+    description: >
+      Number of non-prepared statements for which a cached plan was not used (internal queries)
+  - name: prometheus.metrics.sql_query_count
+    type: double
+    description: >
+      Number of SQL queries
+  - name: prometheus.metrics.sql_query_count_internal
+    type: double
+    description: >
+      Number of SQL queries (internal queries)
+  - name: prometheus.metrics.sql_restart_savepoint_count
+    type: double
+    description: >
+      Number of `SAVEPOINT cockroach_restart` statements
+  - name: prometheus.metrics.sql_restart_savepoint_count_internal
+    type: double
+    description: >
+      Number of `SAVEPOINT cockroach_restart` statements (internal queries)
+  - name: prometheus.metrics.sql_restart_savepoint_release_count
+    type: double
+    description: >
+      Number of `RELEASE SAVEPOINT cockroach_restart` statements
+  - name: prometheus.metrics.sql_restart_savepoint_release_count_internal
+    type: double
+    description: >
+      Number of `RELEASE SAVEPOINT cockroach_restart` statements (internal queries)
+  - name: prometheus.metrics.sql_restart_savepoint_rollback_count
+    type: double
+    description: >
+      Number of `ROLLBACK TO SAVEPOINT cockroach_restart` statements
+  - name: prometheus.metrics.sql_restart_savepoint_rollback_count_internal
+    type: double
+    description: >
+      Number of `ROLLBACK TO SAVEPOINT cockroach_restart` statements (internal queries)
+  - name: prometheus.metrics.sql_savepoint_count
+    type: double
+    description: >
+      Number of SQL SAVEPOINT statements
+  - name: prometheus.metrics.sql_savepoint_count_internal
+    type: double
+    description: >
+      Number of SQL SAVEPOINT statements (internal queries)
+  - name: prometheus.metrics.sql_select_count
+    type: double
+    description: >
+      Number of SQL SELECT statements
+  - name: prometheus.metrics.sql_select_count_internal
+    type: double
+    description: >
+      Number of SQL SELECT statements (internal queries)
+  - name: prometheus.metrics.sql_service_latency_bucket
+    type: double
+    description: >
+      Latency of SQL request execution
+  - name: prometheus.metrics.sql_service_latency_sum
+    type: double
+    description: >
+      Sum of Latency of SQL request execution
+  - name: prometheus.metrics.sql_service_latency_count
+    type: double
+    description: >
+      Count of Latency of SQL request execution
+  - name: prometheus.metrics.sql_service_latency_internal_bucket
+    type: double
+    description: >
+      Latency of SQL request execution (internal queries)
+  - name: prometheus.metrics.sql_service_latency_internal_sum
+    type: double
+    description: >
+      Sum of Latency of SQL request execution (internal queries)
+  - name: prometheus.metrics.sql_service_latency_internal_count
+    type: double
+    description: >
+      Count of Latency of SQL request execution (internal queries)
+  - name: prometheus.metrics.sql_txn_abort_count
+    type: double
+    description: >
+      Number of SQL transaction abort errors
+  - name: prometheus.metrics.sql_txn_abort_count_internal
+    type: double
+    description: >
+      Number of SQL transaction abort errors (internal queries)
+  - name: prometheus.metrics.sql_txn_begin_count
+    type: double
+    description: >
+      Number of SQL transaction BEGIN statements
+  - name: prometheus.metrics.sql_txn_begin_count_internal
+    type: double
+    description: >
+      Number of SQL transaction BEGIN statements (internal queries)
+  - name: prometheus.metrics.sql_txn_commit_count
+    type: double
+    description: >
+      Number of SQL transaction COMMIT statements
+  - name: prometheus.metrics.sql_txn_commit_count_internal
+    type: double
+    description: >
+      Number of SQL transaction COMMIT statements (internal queries)
+  - name: prometheus.metrics.sql_txn_rollback_count
+    type: double
+    description: >
+      Number of SQL transaction ROLLBACK statements
+  - name: prometheus.metrics.sql_txn_rollback_count_internal
+    type: double
+    description: >
+      Number of SQL transaction ROLLBACK statements (internal queries)
+  - name: prometheus.metrics.sql_update_count
+    type: double
+    description: >
+      Number of SQL UPDATE statements
+  - name: prometheus.metrics.sql_update_count_internal
+    type: double
+    description: >
+      Number of SQL UPDATE statements (internal queries)
+  - name: prometheus.metrics.sys_cgo_allocbytes
+    type: double
+    description: >
+      Current bytes of memory allocated by cgo
+  - name: prometheus.metrics.sys_cgo_totalbytes
+    type: double
+    description: >
+      Total bytes of memory allocated by cgo, but not released
+  - name: prometheus.metrics.sys_cgocalls
+    type: double
+    description: >
+      Total number of cgo calls
+  - name: prometheus.metrics.sys_cpu_combined_percent_normalized
+    type: double
+    description: >
+      Current user+system cpu percentage, normalized 0-1 by number of cores
+  - name: prometheus.metrics.sys_cpu_sys_ns
+    type: double
+    description: >
+      Total system cpu time
+  - name: prometheus.metrics.sys_cpu_sys_percent
+    type: double
+    description: >
+      Current system cpu percentage
+  - name: prometheus.metrics.sys_cpu_user_ns
+    type: double
+    description: >
+      Total user cpu time
+  - name: prometheus.metrics.sys_cpu_user_percent
+    type: double
+    description: >
+      Current user cpu percentage
+  - name: prometheus.metrics.sys_fd_open
+    type: double
+    description: >
+      Process open file descriptors
+  - name: prometheus.metrics.sys_fd_softlimit
+    type: double
+    description: >
+      Process open FD soft limit
+  - name: prometheus.metrics.sys_gc_count
+    type: double
+    description: >
+      Total number of GC runs
+  - name: prometheus.metrics.sys_gc_pause_ns
+    type: double
+    description: >
+      Total GC pause
+  - name: prometheus.metrics.sys_gc_pause_percent
+    type: double
+    description: >
+      Current GC pause percentage
+  - name: prometheus.metrics.sys_go_allocbytes
+    type: double
+    description: >
+      Current bytes of memory allocated by go
+  - name: prometheus.metrics.sys_go_totalbytes
+    type: double
+    description: >
+      Total bytes of memory allocated by go, but not released
+  - name: prometheus.metrics.sys_goroutines
+    type: double
+    description: >
+      Current number of goroutines
+  - name: prometheus.metrics.sys_host_disk_io_time
+    type: double
+    description: >
+      Time spent reading from or writing to all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_iopsinprogress
+    type: double
+    description: >
+      IO operations currently in progress on this host
+  - name: prometheus.metrics.sys_host_disk_read_bytes
+    type: double
+    description: >
+      Bytes read from all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_read_count
+    type: double
+    description: >
+      Disk read operations across all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_read_time
+    type: double
+    description: >
+      Time spent reading from all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_weightedio_time
+    type: double
+    description: >
+      Weighted time spent reading from or writing to to all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_write_bytes
+    type: double
+    description: >
+      Bytes written to all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_write_count
+    type: double
+    description: >
+      Disk write operations across all disks since this process started
+  - name: prometheus.metrics.sys_host_disk_write_time
+    type: double
+    description: >
+      Time spent writing to all disks since this process started
+  - name: prometheus.metrics.sys_host_net_recv_bytes
+    type: double
+    description: >
+      Bytes received on all network interfaces since this process started
+  - name: prometheus.metrics.sys_host_net_recv_packets
+    type: double
+    description: >
+      Packets received on all network interfaces since this process started
+  - name: prometheus.metrics.sys_host_net_send_bytes
+    type: double
+    description: >
+      Bytes sent on all network interfaces since this process started
+  - name: prometheus.metrics.sys_host_net_send_packets
+    type: double
+    description: >
+      Packets sent on all network interfaces since this process started
+  - name: prometheus.metrics.sys_rss
+    type: double
+    description: >
+      Current process RSS
+  - name: prometheus.metrics.sys_uptime
+    type: double
+    description: >
+      Process uptime
+  - name: prometheus.metrics.sysbytes
+    type: double
+    description: >
+      Number of bytes in system KV pairs
+  - name: prometheus.metrics.syscount
+    type: double
+    description: >
+      Count of system KV pairs
+  - name: prometheus.metrics.timeseries_write_bytes
+    type: double
+    description: >
+      Total size in bytes of metric samples written to disk
+  - name: prometheus.metrics.timeseries_write_errors
+    type: double
+    description: >
+      Total errors encountered while attempting to write metrics to disk
+  - name: prometheus.metrics.timeseries_write_samples
+    type: double
+    description: >
+      Total number of metric samples written to disk
+  - name: prometheus.metrics.totalbytes
+    type: double
+    description: >
+      Total number of bytes taken up by keys and values including non-live data
+  - name: prometheus.metrics.tscache_skl_read_pages
+    type: double
+    description: >
+      Number of pages in the read timestamp cache
+  - name: prometheus.metrics.tscache_skl_read_rotations
+    type: double
+    description: >
+      Number of page rotations in the read timestamp cache
+  - name: prometheus.metrics.tscache_skl_write_pages
+    type: double
+    description: >
+      Number of pages in the write timestamp cache
+  - name: prometheus.metrics.tscache_skl_write_rotations
+    type: double
+    description: >
+      Number of page rotations in the write timestamp cache
+  - name: prometheus.metrics.txn_aborts
+    type: double
+    description: >
+      Number of aborted KV transactions
+  - name: prometheus.metrics.txn_autoretries
+    type: double
+    description: >
+      Number of automatic retries to avoid serializable restarts
+  - name: prometheus.metrics.txn_commits
+    type: double
+    description: >
+      Number of committed KV transactions (including 1PC)
+  - name: prometheus.metrics.txn_commits1PC
+    type: double
+    description: >
+      Number of committed one-phase KV transactions
+  - name: prometheus.metrics.txn_durations_bucket
+    type: double
+    description: >
+      KV transaction durations
+  - name: prometheus.metrics.txn_durations_sum
+    type: double
+    description: >
+      Sum of KV transaction durations
+  - name: prometheus.metrics.txn_durations_count
+    type: double
+    description: >
+      Count of KV transaction durations
+  - name: prometheus.metrics.txn_restarts_bucket
+    type: double
+    description: >
+      Number of restarted KV transactions
+  - name: prometheus.metrics.txn_restarts_sum
+    type: double
+    description: >
+      Sum of Number of restarted KV transactions
+  - name: prometheus.metrics.txn_restarts_count
+    type: double
+    description: >
+      Count of Number of restarted KV transactions
+  - name: prometheus.metrics.txn_restarts_asyncwritefailure
+    type: double
+    description: >
+      Number of restarts due to async consensus writes that failed to leave intents
+  - name: prometheus.metrics.txn_restarts_possiblereplay
+    type: double
+    description: >
+      Number of restarts due to possible replays of command batches at the storage layer
+  - name: prometheus.metrics.txn_restarts_readwithinuncertainty
+    type: double
+    description: >
+      Number of restarts due to reading a new value within the uncertainty interval
+  - name: prometheus.metrics.txn_restarts_serializable
+    type: double
+    description: >
+      Number of restarts due to a forwarded commit timestamp and isolation=SERIALIZABLE
+  - name: prometheus.metrics.txn_restarts_txnaborted
+    type: double
+    description: >
+      Number of restarts due to an abort by a concurrent transaction (usually due to deadlock)
+  - name: prometheus.metrics.txn_restarts_txnpush
+    type: double
+    description: >
+      Number of restarts due to a transaction push failure
+  - name: prometheus.metrics.txn_restarts_unknown
+    type: double
+    description: >
+      Number of restarts due to a unknown reasons
+  - name: prometheus.metrics.txn_restarts_writetooold
+    type: double
+    description: >
+      Number of restarts due to a concurrent writer committing first
+  - name: prometheus.metrics.txn_restarts_writetoooldmulti
+    type: double
+    description: >
+      Number of restarts due to multiple concurrent writers committing first
+  - name: prometheus.metrics.txnwaitqueue_deadlocks_total
+    type: double
+    description: >
+      Number of deadlocks detected by the txn wait queue
+  - name: prometheus.metrics.txnwaitqueue_pushee_waiting
+    type: double
+    description: >
+      Number of pushees on the txn wait queue
+  - name: prometheus.metrics.txnwaitqueue_pusher_slow
+    type: double
+    description: >
+      The total number of cases where a pusher waited more than the excessive wait threshold
+  - name: prometheus.metrics.txnwaitqueue_pusher_wait_time_bucket
+    type: double
+    description: >
+      Histogram of durations spent in queue by pushers
+  - name: prometheus.metrics.txnwaitqueue_pusher_wait_time_sum
+    type: double
+    description: >
+      Sum of Histogram of durations spent in queue by pushers
+  - name: prometheus.metrics.txnwaitqueue_pusher_wait_time_count
+    type: double
+    description: >
+      Count of Histogram of durations spent in queue by pushers
+  - name: prometheus.metrics.txnwaitqueue_pusher_waiting
+    type: double
+    description: >
+      Number of pushers on the txn wait queue
+  - name: prometheus.metrics.txnwaitqueue_query_wait_time_bucket
+    type: double
+    description: >
+      Histogram of durations spent in queue by queries
+  - name: prometheus.metrics.txnwaitqueue_query_wait_time_sum
+    type: double
+    description: >
+      Sum of Histogram of durations spent in queue by queries
+  - name: prometheus.metrics.txnwaitqueue_query_wait_time_count
+    type: double
+    description: >
+      Count of Histogram of durations spent in queue by queries
+  - name: prometheus.metrics.txnwaitqueue_query_waiting
+    type: double
+    description: >
+      Number of transaction status queries waiting for an updated transaction record
+  - name: prometheus.metrics.valbytes
+    type: double
+    description: >
+      Number of bytes taken up by values
+  - name: prometheus.metrics.valcount
+    type: double
+    description: >
+      Count of all values
+  - name: cockroachdb
+    type: group
+    fields:

@@ -2709,6 +2709,4216 @@ CockroachDB module
 
 
 
+*`prometheus.metrics.addsstable_applications`*::
++
+--
+Number of SSTable ingestions applied (i.e. applied by Replicas)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.addsstable_copies`*::
++
+--
+number of SSTable ingestions that required copying files during application
+
+
+type: double
+
+--
+
+*`prometheus.metrics.addsstable_proposals`*::
++
+--
+Number of SSTable ingestions proposed (i.e. sent to Raft by lease holders)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.build_timestamp`*::
++
+--
+Build information
+
+
+type: double
+
+--
+
+*`prometheus.metrics.capacity`*::
++
+--
+Total storage capacity
+
+
+type: double
+
+--
+
+*`prometheus.metrics.capacity_available`*::
++
+--
+Available storage capacity
+
+
+type: double
+
+--
+
+*`prometheus.metrics.capacity_reserved`*::
++
+--
+Capacity reserved for snapshots
+
+
+type: double
+
+--
+
+*`prometheus.metrics.capacity_used`*::
++
+--
+Used storage capacity
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_buffer_entries_in`*::
++
+--
+Total entries entering the buffer between raft and changefeed sinks
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_buffer_entries_out`*::
++
+--
+Total entries leaving the buffer between raft and changefeed sinks
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_emit_nanos`*::
++
+--
+Total time spent emitting all feeds
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_emitted_bytes`*::
++
+--
+Bytes emitted by all feeds
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_emitted_messages`*::
++
+--
+Messages emitted by all feeds
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_error_retries`*::
++
+--
+Total retryable errors encountered by all changefeeds
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_flush_nanos`*::
++
+--
+Total time spent flushing all feeds
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_flushes`*::
++
+--
+Total flushes across all feeds
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_max_behind_nanos`*::
++
+--
+Largest commit-to-emit duration of any running feed
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_min_high_water`*::
++
+--
+Latest high-water timestamp of most behind feed
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_poll_request_nanos_bucket`*::
++
+--
+Time spent fetching changes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_poll_request_nanos_sum`*::
++
+--
+Sum of Time spent fetching changes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_poll_request_nanos_count`*::
++
+--
+Count of Time spent fetching changes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_processing_nanos`*::
++
+--
+Time spent processing KV changes into SQL rows
+
+
+type: double
+
+--
+
+*`prometheus.metrics.changefeed_table_metadata_nanos`*::
++
+--
+Time blocked while verifying table metadata histories
+
+
+type: double
+
+--
+
+*`prometheus.metrics.clock_offset_meannanos`*::
++
+--
+Mean clock offset with other nodes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.clock_offset_stddevnanos`*::
++
+--
+Stddev clock offset with other nodes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.compactor_compactingnanos`*::
++
+--
+Number of nanoseconds spent compacting ranges
+
+
+type: double
+
+--
+
+*`prometheus.metrics.compactor_compactions_failure`*::
++
+--
+Number of failed compaction requests sent to the storage engine
+
+
+type: double
+
+--
+
+*`prometheus.metrics.compactor_compactions_success`*::
++
+--
+Number of successful compaction requests sent to the storage engine
+
+
+type: double
+
+--
+
+*`prometheus.metrics.compactor_suggestionbytes_compacted`*::
++
+--
+Number of logical bytes compacted from suggested compactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.compactor_suggestionbytes_queued`*::
++
+--
+Number of logical bytes in suggested compactions in the queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.compactor_suggestionbytes_skipped`*::
++
+--
+Number of logical bytes in suggested compactions which were not compacted
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_batches`*::
++
+--
+Number of batches processed
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_batches_async_sent`*::
++
+--
+Number of partial batches sent asynchronously
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_batches_async_throttled`*::
++
+--
+Number of partial batches not sent asynchronously due to throttling
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_batches_partial`*::
++
+--
+Number of partial batches processed after being divided on range boundaries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_errors_inleasetransferbackoffs`*::
++
+--
+Number of times backed off due to NotLeaseHolderErrors during lease transfer.
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_errors_notleaseholder`*::
++
+--
+Number of NotLeaseHolderErrors encountered
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_rpc_sent`*::
++
+--
+Number of RPCs sent
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_rpc_sent_local`*::
++
+--
+Number of local RPCs sent
+
+
+type: double
+
+--
+
+*`prometheus.metrics.distsender_rpc_sent_nextreplicaerror`*::
++
+--
+Number of RPCs sent due to per-replica errors
+
+
+type: double
+
+--
+
+*`prometheus.metrics.exec_error`*::
++
+--
+Number of batch KV requests that failed to execute on this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.exec_latency_bucket`*::
++
+--
+Latency of batch KV requests executed on this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.exec_latency_sum`*::
++
+--
+Sum of Latency of batch KV requests executed on this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.exec_latency_count`*::
++
+--
+Count of Latency of batch KV requests executed on this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.exec_success`*::
++
+--
+Number of batch KV requests executed successfully on this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.follower_reads_success_count`*::
++
+--
+Number of reads successfully processed by any replica
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gcbytesage`*::
++
+--
+Cumulative age of non-live data
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_bytes_received`*::
++
+--
+Number of received gossip bytes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_bytes_sent`*::
++
+--
+Number of sent gossip bytes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_connections_incoming`*::
++
+--
+Number of active incoming gossip connections
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_connections_outgoing`*::
++
+--
+Number of active outgoing gossip connections
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_connections_refused`*::
++
+--
+Number of refused incoming gossip connections
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_infos_received`*::
++
+--
+Number of received gossip Info objects
+
+
+type: double
+
+--
+
+*`prometheus.metrics.gossip_infos_sent`*::
++
+--
+Number of sent gossip Info objects
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intentage`*::
++
+--
+Cumulative age of intents
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intentbytes`*::
++
+--
+Number of bytes in intent KV pairs
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intentcount`*::
++
+--
+Count of intent keys
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intentresolver_async_throttled`*::
++
+--
+Number of intent resolution attempts not run asynchronously due to throttling
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intents_abort_attempts`*::
++
+--
+Count of (point or range) non-poisoning intent abort evaluation attempts
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intents_poison_attempts`*::
++
+--
+Count of (point or range) poisoning intent abort evaluation attempts
+
+
+type: double
+
+--
+
+*`prometheus.metrics.intents_resolve_attempts`*::
++
+--
+Count of (point or range) intent commit evaluation attempts
+
+
+type: double
+
+--
+
+*`prometheus.metrics.keybytes`*::
++
+--
+Number of bytes taken up by keys
+
+
+type: double
+
+--
+
+*`prometheus.metrics.keycount`*::
++
+--
+Count of all keys
+
+
+type: double
+
+--
+
+*`prometheus.metrics.kv_closed_timestamp_max_behind_nanos`*::
++
+--
+Largest latency between realtime and replica max closed timestamp
+
+
+type: double
+
+--
+
+*`prometheus.metrics.kv_rangefeed_catchup_scan_nanos`*::
++
+--
+Time spent in RangeFeed catchup scan
+
+
+type: double
+
+--
+
+*`prometheus.metrics.lastupdatenanos`*::
++
+--
+Timestamp at which bytes/keys/intents metrics were last updated
+
+
+type: double
+
+--
+
+*`prometheus.metrics.leases_epoch`*::
++
+--
+Number of replica leaseholders using epoch-based leases
+
+
+type: double
+
+--
+
+*`prometheus.metrics.leases_error`*::
++
+--
+Number of failed lease requests
+
+
+type: double
+
+--
+
+*`prometheus.metrics.leases_expiration`*::
++
+--
+Number of replica leaseholders using expiration-based leases
+
+
+type: double
+
+--
+
+*`prometheus.metrics.leases_success`*::
++
+--
+Number of successful lease requests
+
+
+type: double
+
+--
+
+*`prometheus.metrics.leases_transfers_error`*::
++
+--
+Number of failed lease transfers
+
+
+type: double
+
+--
+
+*`prometheus.metrics.leases_transfers_success`*::
++
+--
+Number of successful lease transfers
+
+
+type: double
+
+--
+
+*`prometheus.metrics.livebytes`*::
++
+--
+Number of bytes of live data (keys plus values)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.livecount`*::
++
+--
+Count of live keys
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_epochincrements`*::
++
+--
+Number of times this node has incremented its liveness epoch
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_heartbeatfailures`*::
++
+--
+Number of failed node liveness heartbeats from this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_heartbeatlatency_bucket`*::
++
+--
+Node liveness heartbeat latency
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_heartbeatlatency_sum`*::
++
+--
+Sum of Node liveness heartbeat latency
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_heartbeatlatency_count`*::
++
+--
+Count of Node liveness heartbeat latency
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_heartbeatsuccesses`*::
++
+--
+Number of successful node liveness heartbeats from this node
+
+
+type: double
+
+--
+
+*`prometheus.metrics.liveness_livenodes`*::
++
+--
+Number of live nodes in the cluster (will be 0 if this node is not itself live)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.node_id`*::
++
+--
+node ID with labels for advertised RPC and HTTP addresses
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_consistency_pending`*::
++
+--
+Number of pending replicas in the consistency checker queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_consistency_process_failure`*::
++
+--
+Number of replicas which failed processing in the consistency checker queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_consistency_process_success`*::
++
+--
+Number of replicas successfully processed by the consistency checker queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_consistency_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the consistency checker queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_abortspanconsidered`*::
++
+--
+Number of AbortSpan entries old enough to be considered for removal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_abortspangcnum`*::
++
+--
+Number of AbortSpan entries fit for removal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_abortspanscanned`*::
++
+--
+Number of transactions present in the AbortSpan scanned from the engine
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_intentsconsidered`*::
++
+--
+Number of 'old' intents
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_intenttxns`*::
++
+--
+Number of associated distinct transactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_numkeysaffected`*::
++
+--
+Number of keys with GC'able data
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_pushtxn`*::
++
+--
+Number of attempted pushes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_resolvesuccess`*::
++
+--
+Number of successful intent resolutions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_resolvetotal`*::
++
+--
+Number of attempted intent resolutions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_transactionspangcaborted`*::
++
+--
+Number of GC'able entries corresponding to aborted txns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_transactionspangccommitted`*::
++
+--
+Number of GC'able entries corresponding to committed txns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_transactionspangcpending`*::
++
+--
+Number of GC'able entries corresponding to pending txns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_info_transactionspanscanned`*::
++
+--
+Number of entries in transaction spans scanned from the engine
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_pending`*::
++
+--
+Number of pending replicas in the GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_process_failure`*::
++
+--
+Number of replicas which failed processing in the GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_process_success`*::
++
+--
+Number of replicas successfully processed by the GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_gc_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_merge_pending`*::
++
+--
+Number of pending replicas in the merge queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_merge_process_failure`*::
++
+--
+Number of replicas which failed processing in the merge queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_merge_process_success`*::
++
+--
+Number of replicas successfully processed by the merge queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_merge_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the merge queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_merge_purgatory`*::
++
+--
+Number of replicas in the merge queue's purgatory, waiting to become mergeable
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftlog_pending`*::
++
+--
+Number of pending replicas in the Raft log queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftlog_process_failure`*::
++
+--
+Number of replicas which failed processing in the Raft log queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftlog_process_success`*::
++
+--
+Number of replicas successfully processed by the Raft log queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftlog_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the Raft log queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftsnapshot_pending`*::
++
+--
+Number of pending replicas in the Raft repair queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftsnapshot_process_failure`*::
++
+--
+Number of replicas which failed processing in the Raft repair queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftsnapshot_process_success`*::
++
+--
+Number of replicas successfully processed by the Raft repair queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_raftsnapshot_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the Raft repair queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicagc_pending`*::
++
+--
+Number of pending replicas in the replica GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicagc_process_failure`*::
++
+--
+Number of replicas which failed processing in the replica GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicagc_process_success`*::
++
+--
+Number of replicas successfully processed by the replica GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicagc_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the replica GC queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicagc_removereplica`*::
++
+--
+Number of replica removals attempted by the replica gc queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_addreplica`*::
++
+--
+Number of replica additions attempted by the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_pending`*::
++
+--
+Number of pending replicas in the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_process_failure`*::
++
+--
+Number of replicas which failed processing in the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_process_success`*::
++
+--
+Number of replicas successfully processed by the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_purgatory`*::
++
+--
+Number of replicas in the replicate queue's purgatory, awaiting allocation options
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_rebalancereplica`*::
++
+--
+Number of replica rebalancer-initiated additions attempted by the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_removedeadreplica`*::
++
+--
+Number of dead replica removals attempted by the replicate queue (typically in response to a node outage)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_removereplica`*::
++
+--
+Number of replica removals attempted by the replicate queue (typically in response to a rebalancer-initiated addition)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_replicate_transferlease`*::
++
+--
+Number of range lease transfers attempted by the replicate queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_split_pending`*::
++
+--
+Number of pending replicas in the split queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_split_process_failure`*::
++
+--
+Number of replicas which failed processing in the split queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_split_process_success`*::
++
+--
+Number of replicas successfully processed by the split queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_split_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the split queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_split_purgatory`*::
++
+--
+Number of replicas in the split queue's purgatory, waiting to become splittable
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_tsmaintenance_pending`*::
++
+--
+Number of pending replicas in the time series maintenance queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_tsmaintenance_process_failure`*::
++
+--
+Number of replicas which failed processing in the time series maintenance queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_tsmaintenance_process_success`*::
++
+--
+Number of replicas successfully processed by the time series maintenance queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.queue_tsmaintenance_processingnanos`*::
++
+--
+Nanoseconds spent processing replicas in the time series maintenance queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_commandsapplied`*::
++
+--
+Count of Raft commands applied
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_enqueued_pending`*::
++
+--
+Number of pending outgoing messages in the Raft Transport queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_entrycache_accesses`*::
++
+--
+Number of cache lookups in the Raft entry cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_entrycache_bytes`*::
++
+--
+Aggregate size of all Raft entries in the Raft entry cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_entrycache_hits`*::
++
+--
+Number of successful cache lookups in the Raft entry cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_entrycache_size`*::
++
+--
+Number of Raft entries in the Raft entry cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_heartbeats_pending`*::
++
+--
+Number of pending heartbeats and responses waiting to be coalesced
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_applycommitted_latency_bucket`*::
++
+--
+Latency histogram for applying all committed Raft commands in a Raft ready
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_applycommitted_latency_sum`*::
++
+--
+Sum of Latency histogram for applying all committed Raft commands in a Raft ready
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_applycommitted_latency_count`*::
++
+--
+Count of Latency histogram for applying all committed Raft commands in a Raft ready
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_commandcommit_latency_bucket`*::
++
+--
+Latency histogram for committing Raft commands
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_commandcommit_latency_sum`*::
++
+--
+Sum of Latency histogram for committing Raft commands
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_commandcommit_latency_count`*::
++
+--
+Count of Latency histogram for committing Raft commands
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_handleready_latency_bucket`*::
++
+--
+Latency histogram for handling a Raft ready
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_handleready_latency_sum`*::
++
+--
+Sum of Latency histogram for handling a Raft ready
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_handleready_latency_count`*::
++
+--
+Count of Latency histogram for handling a Raft ready
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_logcommit_latency_bucket`*::
++
+--
+Latency histogram for committing Raft log entries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_logcommit_latency_sum`*::
++
+--
+Sum of Latency histogram for committing Raft log entries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_logcommit_latency_count`*::
++
+--
+Count of Latency histogram for committing Raft log entries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_tickingnanos`*::
++
+--
+Nanoseconds spent in store.processRaft() processing replica.Tick()
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_process_workingnanos`*::
++
+--
+Nanoseconds spent in store.processRaft() working
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_app`*::
++
+--
+Number of MsgApp messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_appresp`*::
++
+--
+Number of MsgAppResp messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_dropped`*::
++
+--
+Number of dropped incoming Raft messages
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_heartbeat`*::
++
+--
+Number of (coalesced, if enabled) MsgHeartbeat messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_heartbeatresp`*::
++
+--
+Number of (coalesced, if enabled) MsgHeartbeatResp messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_prevote`*::
++
+--
+Number of MsgPreVote messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_prevoteresp`*::
++
+--
+Number of MsgPreVoteResp messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_prop`*::
++
+--
+Number of MsgProp messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_snap`*::
++
+--
+Number of MsgSnap messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_timeoutnow`*::
++
+--
+Number of MsgTimeoutNow messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_transferleader`*::
++
+--
+Number of MsgTransferLeader messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_vote`*::
++
+--
+Number of MsgVote messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_rcvd_voteresp`*::
++
+--
+Number of MsgVoteResp messages received by this store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raft_ticks`*::
++
+--
+Number of Raft ticks queued
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raftlog_behind`*::
++
+--
+Number of Raft log entries followers on other stores are behind
+
+
+type: double
+
+--
+
+*`prometheus.metrics.raftlog_truncated`*::
++
+--
+Number of Raft log entries truncated
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_adds`*::
++
+--
+Number of range additions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_merges`*::
++
+--
+Number of range merges
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_raftleadertransfers`*::
++
+--
+Number of raft leader transfers
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_removes`*::
++
+--
+Number of range removals
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_snapshots_generated`*::
++
+--
+Number of generated snapshots
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_snapshots_normal_applied`*::
++
+--
+Number of applied snapshots
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_snapshots_preemptive_applied`*::
++
+--
+Number of applied pre-emptive snapshots
+
+
+type: double
+
+--
+
+*`prometheus.metrics.range_splits`*::
++
+--
+Number of range splits
+
+
+type: double
+
+--
+
+*`prometheus.metrics.ranges`*::
++
+--
+Number of ranges
+
+
+type: double
+
+--
+
+*`prometheus.metrics.ranges_overreplicated`*::
++
+--
+Number of ranges with more live replicas than the replication target
+
+
+type: double
+
+--
+
+*`prometheus.metrics.ranges_unavailable`*::
++
+--
+Number of ranges with fewer live replicas than needed for quorum
+
+
+type: double
+
+--
+
+*`prometheus.metrics.ranges_underreplicated`*::
++
+--
+Number of ranges with fewer live replicas than the replication target
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rebalancing_lease_transfers`*::
++
+--
+Number of lease transfers motivated by store-level load imbalances
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rebalancing_queriespersecond`*::
++
+--
+Number of kv-level requests received per second by the store, averaged over a large time period as used in rebalancing decisions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rebalancing_range_rebalances`*::
++
+--
+Number of range rebalance operations motivated by store-level load imbalances
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rebalancing_writespersecond`*::
++
+--
+Number of keys written (i.e. applied by raft) per second to the store, averaged over a large time period as used in rebalancing decisions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.replicas`*::
++
+--
+Number of replicas
+
+
+type: double
+
+--
+
+*`prometheus.metrics.replicas_leaders`*::
++
+--
+Number of raft leaders
+
+
+type: double
+
+--
+
+*`prometheus.metrics.replicas_leaders_not_leaseholders`*::
++
+--
+Number of replicas that are Raft leaders whose range lease is held by another store
+
+
+type: double
+
+--
+
+*`prometheus.metrics.replicas_leaseholders`*::
++
+--
+Number of lease holders
+
+
+type: double
+
+--
+
+*`prometheus.metrics.replicas_quiescent`*::
++
+--
+Number of quiesced replicas
+
+
+type: double
+
+--
+
+*`prometheus.metrics.replicas_reserved`*::
++
+--
+Number of replicas reserved for snapshots
+
+
+type: double
+
+--
+
+*`prometheus.metrics.requests_backpressure_split`*::
++
+--
+Number of backpressured writes waiting on a Range split
+
+
+type: double
+
+--
+
+*`prometheus.metrics.requests_slow_latch`*::
++
+--
+Number of requests that have been stuck for a long time acquiring latches
+
+
+type: double
+
+--
+
+*`prometheus.metrics.requests_slow_lease`*::
++
+--
+Number of requests that have been stuck for a long time acquiring a lease
+
+
+type: double
+
+--
+
+*`prometheus.metrics.requests_slow_raft`*::
++
+--
+Number of requests that have been stuck for a long time in raft
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_block_cache_hits`*::
++
+--
+Count of block cache hits
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_block_cache_misses`*::
++
+--
+Count of block cache misses
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_block_cache_pinned_usage`*::
++
+--
+Bytes pinned by the block cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_block_cache_usage`*::
++
+--
+Bytes used by the block cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_bloom_filter_prefix_checked`*::
++
+--
+Number of times the bloom filter was checked
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_bloom_filter_prefix_useful`*::
++
+--
+Number of times the bloom filter helped avoid iterator creation
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_compactions`*::
++
+--
+Number of table compactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_encryption_algorithm`*::
++
+--
+algorithm in use for encryption-at-rest, see ccl/storageccl/engineccl/enginepbccl/key_registry.proto
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_flushes`*::
++
+--
+Number of table flushes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_memtable_total_size`*::
++
+--
+Current size of memtable in bytes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_num_sstables`*::
++
+--
+Number of rocksdb SSTables
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_read_amplification`*::
++
+--
+Number of disk reads per query
+
+
+type: double
+
+--
+
+*`prometheus.metrics.rocksdb_table_readers_mem_estimate`*::
++
+--
+Memory used by index and filter blocks
+
+
+type: double
+
+--
+
+*`prometheus.metrics.round_trip_latency_bucket`*::
++
+--
+Distribution of round-trip latencies with other nodes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.round_trip_latency_sum`*::
++
+--
+Sum of Distribution of round-trip latencies with other nodes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.round_trip_latency_count`*::
++
+--
+Count of Distribution of round-trip latencies with other nodes
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_bytesin`*::
++
+--
+Number of sql bytes received
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_bytesout`*::
++
+--
+Number of sql bytes sent
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_conns`*::
++
+--
+Number of active sql connections
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_ddl_count`*::
++
+--
+Number of SQL DDL statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_ddl_count_internal`*::
++
+--
+Number of SQL DDL statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_delete_count`*::
++
+--
+Number of SQL DELETE statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_delete_count_internal`*::
++
+--
+Number of SQL DELETE statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_exec_latency_bucket`*::
++
+--
+Latency of DistSQL statement execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_exec_latency_sum`*::
++
+--
+Sum of Latency of DistSQL statement execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_exec_latency_count`*::
++
+--
+Count of Latency of DistSQL statement execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_exec_latency_internal_bucket`*::
++
+--
+Latency of DistSQL statement execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_exec_latency_internal_sum`*::
++
+--
+Sum of Latency of DistSQL statement execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_exec_latency_internal_count`*::
++
+--
+Count of Latency of DistSQL statement execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_flows_active`*::
++
+--
+Number of distributed SQL flows currently active
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_flows_queue_wait_bucket`*::
++
+--
+Duration of time flows spend waiting in the queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_flows_queue_wait_sum`*::
++
+--
+Sum of Duration of time flows spend waiting in the queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_flows_queue_wait_count`*::
++
+--
+Count of Duration of time flows spend waiting in the queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_flows_queued`*::
++
+--
+Number of distributed SQL flows currently queued
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_flows_total`*::
++
+--
+Number of distributed SQL flows executed
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_queries_active`*::
++
+--
+Number of distributed SQL queries currently active
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_queries_total`*::
++
+--
+Number of distributed SQL queries executed
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_select_count`*::
++
+--
+Number of DistSQL SELECT statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_select_count_internal`*::
++
+--
+Number of DistSQL SELECT statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_service_latency_bucket`*::
++
+--
+Latency of DistSQL request execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_service_latency_sum`*::
++
+--
+Sum of Latency of DistSQL request execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_service_latency_count`*::
++
+--
+Count of Latency of DistSQL request execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_service_latency_internal_bucket`*::
++
+--
+Latency of DistSQL request execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_service_latency_internal_sum`*::
++
+--
+Sum of Latency of DistSQL request execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_distsql_service_latency_internal_count`*::
++
+--
+Count of Latency of DistSQL request execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_exec_latency_bucket`*::
++
+--
+Latency of SQL statement execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_exec_latency_sum`*::
++
+--
+Sum of Latency of SQL statement execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_exec_latency_count`*::
++
+--
+Count of Latency of SQL statement execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_exec_latency_internal_bucket`*::
++
+--
+Latency of SQL statement execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_exec_latency_internal_sum`*::
++
+--
+Sum of Latency of SQL statement execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_exec_latency_internal_count`*::
++
+--
+Count of Latency of SQL statement execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_failure_count`*::
++
+--
+Number of statements resulting in a planning or runtime error
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_failure_count_internal`*::
++
+--
+Number of statements resulting in a planning or runtime error (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_insert_count`*::
++
+--
+Number of SQL INSERT statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_insert_count_internal`*::
++
+--
+Number of SQL INSERT statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_current`*::
++
+--
+Current sql statement memory usage for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_max_bucket`*::
++
+--
+Memory usage per sql statement for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_max_sum`*::
++
+--
+Sum of Memory usage per sql statement for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_max_count`*::
++
+--
+Count of Memory usage per sql statement for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_session_current`*::
++
+--
+Current sql session memory usage for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_session_max_bucket`*::
++
+--
+Memory usage per sql session for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_session_max_sum`*::
++
+--
+Sum of Memory usage per sql session for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_session_max_count`*::
++
+--
+Count of Memory usage per sql session for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_txn_current`*::
++
+--
+Current sql transaction memory usage for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_txn_max_bucket`*::
++
+--
+Memory usage per sql transaction for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_txn_max_sum`*::
++
+--
+Sum of Memory usage per sql transaction for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_admin_txn_max_count`*::
++
+--
+Count of Memory usage per sql transaction for admin
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_current`*::
++
+--
+Current sql statement memory usage for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_max_bucket`*::
++
+--
+Memory usage per sql statement for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_max_sum`*::
++
+--
+Sum of Memory usage per sql statement for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_max_count`*::
++
+--
+Count of Memory usage per sql statement for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_session_current`*::
++
+--
+Current sql session memory usage for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_session_max_bucket`*::
++
+--
+Memory usage per sql session for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_session_max_sum`*::
++
+--
+Sum of Memory usage per sql session for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_session_max_count`*::
++
+--
+Count of Memory usage per sql session for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_txn_current`*::
++
+--
+Current sql transaction memory usage for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_txn_max_bucket`*::
++
+--
+Memory usage per sql transaction for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_txn_max_sum`*::
++
+--
+Sum of Memory usage per sql transaction for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_conns_txn_max_count`*::
++
+--
+Count of Memory usage per sql transaction for conns
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_distsql_current`*::
++
+--
+Current sql statement memory usage for distsql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_distsql_max_bucket`*::
++
+--
+Memory usage per sql statement for distsql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_distsql_max_sum`*::
++
+--
+Sum of Memory usage per sql statement for distsql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_distsql_max_count`*::
++
+--
+Count of Memory usage per sql statement for distsql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_current`*::
++
+--
+Current sql statement memory usage for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_max_bucket`*::
++
+--
+Memory usage per sql statement for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_max_sum`*::
++
+--
+Sum of Memory usage per sql statement for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_max_count`*::
++
+--
+Count of Memory usage per sql statement for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_session_current`*::
++
+--
+Current sql session memory usage for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_session_max_bucket`*::
++
+--
+Memory usage per sql session for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_session_max_sum`*::
++
+--
+Sum of Memory usage per sql session for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_session_max_count`*::
++
+--
+Count of Memory usage per sql session for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_txn_current`*::
++
+--
+Current sql transaction memory usage for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_txn_max_bucket`*::
++
+--
+Memory usage per sql transaction for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_txn_max_sum`*::
++
+--
+Sum of Memory usage per sql transaction for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_internal_txn_max_count`*::
++
+--
+Count of Memory usage per sql transaction for internal
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_current`*::
++
+--
+Current sql statement memory usage for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_max_bucket`*::
++
+--
+Memory usage per sql statement for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_max_sum`*::
++
+--
+Sum of Memory usage per sql statement for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_max_count`*::
++
+--
+Count of Memory usage per sql statement for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_session_current`*::
++
+--
+Current sql session memory usage for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_session_max_bucket`*::
++
+--
+Memory usage per sql session for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_session_max_sum`*::
++
+--
+Sum of Memory usage per sql session for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_session_max_count`*::
++
+--
+Count of Memory usage per sql session for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_txn_current`*::
++
+--
+Current sql transaction memory usage for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_txn_max_bucket`*::
++
+--
+Memory usage per sql transaction for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_txn_max_sum`*::
++
+--
+Sum of Memory usage per sql transaction for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_mem_sql_txn_max_count`*::
++
+--
+Count of Memory usage per sql transaction for sql
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_misc_count`*::
++
+--
+Number of other SQL statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_misc_count_internal`*::
++
+--
+Number of other SQL statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_count`*::
++
+--
+Number of statements which ran with the cost-based optimizer
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_count_internal`*::
++
+--
+Number of statements which ran with the cost-based optimizer (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_fallback_count`*::
++
+--
+Number of statements which the cost-based optimizer was unable to plan
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_fallback_count_internal`*::
++
+--
+Number of statements which the cost-based optimizer was unable to plan (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_plan_cache_hits`*::
++
+--
+Number of non-prepared statements for which a cached plan was used
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_plan_cache_hits_internal`*::
++
+--
+Number of non-prepared statements for which a cached plan was used (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_plan_cache_misses`*::
++
+--
+Number of non-prepared statements for which a cached plan was not used
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_optimizer_plan_cache_misses_internal`*::
++
+--
+Number of non-prepared statements for which a cached plan was not used (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_query_count`*::
++
+--
+Number of SQL queries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_query_count_internal`*::
++
+--
+Number of SQL queries (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_restart_savepoint_count`*::
++
+--
+Number of `SAVEPOINT cockroach_restart` statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_restart_savepoint_count_internal`*::
++
+--
+Number of `SAVEPOINT cockroach_restart` statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_restart_savepoint_release_count`*::
++
+--
+Number of `RELEASE SAVEPOINT cockroach_restart` statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_restart_savepoint_release_count_internal`*::
++
+--
+Number of `RELEASE SAVEPOINT cockroach_restart` statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_restart_savepoint_rollback_count`*::
++
+--
+Number of `ROLLBACK TO SAVEPOINT cockroach_restart` statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_restart_savepoint_rollback_count_internal`*::
++
+--
+Number of `ROLLBACK TO SAVEPOINT cockroach_restart` statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_savepoint_count`*::
++
+--
+Number of SQL SAVEPOINT statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_savepoint_count_internal`*::
++
+--
+Number of SQL SAVEPOINT statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_select_count`*::
++
+--
+Number of SQL SELECT statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_select_count_internal`*::
++
+--
+Number of SQL SELECT statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_service_latency_bucket`*::
++
+--
+Latency of SQL request execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_service_latency_sum`*::
++
+--
+Sum of Latency of SQL request execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_service_latency_count`*::
++
+--
+Count of Latency of SQL request execution
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_service_latency_internal_bucket`*::
++
+--
+Latency of SQL request execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_service_latency_internal_sum`*::
++
+--
+Sum of Latency of SQL request execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_service_latency_internal_count`*::
++
+--
+Count of Latency of SQL request execution (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_abort_count`*::
++
+--
+Number of SQL transaction abort errors
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_abort_count_internal`*::
++
+--
+Number of SQL transaction abort errors (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_begin_count`*::
++
+--
+Number of SQL transaction BEGIN statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_begin_count_internal`*::
++
+--
+Number of SQL transaction BEGIN statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_commit_count`*::
++
+--
+Number of SQL transaction COMMIT statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_commit_count_internal`*::
++
+--
+Number of SQL transaction COMMIT statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_rollback_count`*::
++
+--
+Number of SQL transaction ROLLBACK statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_txn_rollback_count_internal`*::
++
+--
+Number of SQL transaction ROLLBACK statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_update_count`*::
++
+--
+Number of SQL UPDATE statements
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sql_update_count_internal`*::
++
+--
+Number of SQL UPDATE statements (internal queries)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cgo_allocbytes`*::
++
+--
+Current bytes of memory allocated by cgo
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cgo_totalbytes`*::
++
+--
+Total bytes of memory allocated by cgo, but not released
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cgocalls`*::
++
+--
+Total number of cgo calls
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cpu_combined_percent_normalized`*::
++
+--
+Current user+system cpu percentage, normalized 0-1 by number of cores
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cpu_sys_ns`*::
++
+--
+Total system cpu time
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cpu_sys_percent`*::
++
+--
+Current system cpu percentage
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cpu_user_ns`*::
++
+--
+Total user cpu time
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_cpu_user_percent`*::
++
+--
+Current user cpu percentage
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_fd_open`*::
++
+--
+Process open file descriptors
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_fd_softlimit`*::
++
+--
+Process open FD soft limit
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_gc_count`*::
++
+--
+Total number of GC runs
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_gc_pause_ns`*::
++
+--
+Total GC pause
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_gc_pause_percent`*::
++
+--
+Current GC pause percentage
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_go_allocbytes`*::
++
+--
+Current bytes of memory allocated by go
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_go_totalbytes`*::
++
+--
+Total bytes of memory allocated by go, but not released
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_goroutines`*::
++
+--
+Current number of goroutines
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_io_time`*::
++
+--
+Time spent reading from or writing to all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_iopsinprogress`*::
++
+--
+IO operations currently in progress on this host
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_read_bytes`*::
++
+--
+Bytes read from all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_read_count`*::
++
+--
+Disk read operations across all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_read_time`*::
++
+--
+Time spent reading from all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_weightedio_time`*::
++
+--
+Weighted time spent reading from or writing to to all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_write_bytes`*::
++
+--
+Bytes written to all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_write_count`*::
++
+--
+Disk write operations across all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_disk_write_time`*::
++
+--
+Time spent writing to all disks since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_net_recv_bytes`*::
++
+--
+Bytes received on all network interfaces since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_net_recv_packets`*::
++
+--
+Packets received on all network interfaces since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_net_send_bytes`*::
++
+--
+Bytes sent on all network interfaces since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_host_net_send_packets`*::
++
+--
+Packets sent on all network interfaces since this process started
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_rss`*::
++
+--
+Current process RSS
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sys_uptime`*::
++
+--
+Process uptime
+
+
+type: double
+
+--
+
+*`prometheus.metrics.sysbytes`*::
++
+--
+Number of bytes in system KV pairs
+
+
+type: double
+
+--
+
+*`prometheus.metrics.syscount`*::
++
+--
+Count of system KV pairs
+
+
+type: double
+
+--
+
+*`prometheus.metrics.timeseries_write_bytes`*::
++
+--
+Total size in bytes of metric samples written to disk
+
+
+type: double
+
+--
+
+*`prometheus.metrics.timeseries_write_errors`*::
++
+--
+Total errors encountered while attempting to write metrics to disk
+
+
+type: double
+
+--
+
+*`prometheus.metrics.timeseries_write_samples`*::
++
+--
+Total number of metric samples written to disk
+
+
+type: double
+
+--
+
+*`prometheus.metrics.totalbytes`*::
++
+--
+Total number of bytes taken up by keys and values including non-live data
+
+
+type: double
+
+--
+
+*`prometheus.metrics.tscache_skl_read_pages`*::
++
+--
+Number of pages in the read timestamp cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.tscache_skl_read_rotations`*::
++
+--
+Number of page rotations in the read timestamp cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.tscache_skl_write_pages`*::
++
+--
+Number of pages in the write timestamp cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.tscache_skl_write_rotations`*::
++
+--
+Number of page rotations in the write timestamp cache
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_aborts`*::
++
+--
+Number of aborted KV transactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_autoretries`*::
++
+--
+Number of automatic retries to avoid serializable restarts
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_commits`*::
++
+--
+Number of committed KV transactions (including 1PC)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_commits1PC`*::
++
+--
+Number of committed one-phase KV transactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_durations_bucket`*::
++
+--
+KV transaction durations
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_durations_sum`*::
++
+--
+Sum of KV transaction durations
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_durations_count`*::
++
+--
+Count of KV transaction durations
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_bucket`*::
++
+--
+Number of restarted KV transactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_sum`*::
++
+--
+Sum of Number of restarted KV transactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_count`*::
++
+--
+Count of Number of restarted KV transactions
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_asyncwritefailure`*::
++
+--
+Number of restarts due to async consensus writes that failed to leave intents
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_possiblereplay`*::
++
+--
+Number of restarts due to possible replays of command batches at the storage layer
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_readwithinuncertainty`*::
++
+--
+Number of restarts due to reading a new value within the uncertainty interval
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_serializable`*::
++
+--
+Number of restarts due to a forwarded commit timestamp and isolation=SERIALIZABLE
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_txnaborted`*::
++
+--
+Number of restarts due to an abort by a concurrent transaction (usually due to deadlock)
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_txnpush`*::
++
+--
+Number of restarts due to a transaction push failure
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_unknown`*::
++
+--
+Number of restarts due to a unknown reasons
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_writetooold`*::
++
+--
+Number of restarts due to a concurrent writer committing first
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txn_restarts_writetoooldmulti`*::
++
+--
+Number of restarts due to multiple concurrent writers committing first
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_deadlocks_total`*::
++
+--
+Number of deadlocks detected by the txn wait queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_pushee_waiting`*::
++
+--
+Number of pushees on the txn wait queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_pusher_slow`*::
++
+--
+The total number of cases where a pusher waited more than the excessive wait threshold
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_pusher_wait_time_bucket`*::
++
+--
+Histogram of durations spent in queue by pushers
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_pusher_wait_time_sum`*::
++
+--
+Sum of Histogram of durations spent in queue by pushers
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_pusher_wait_time_count`*::
++
+--
+Count of Histogram of durations spent in queue by pushers
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_pusher_waiting`*::
++
+--
+Number of pushers on the txn wait queue
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_query_wait_time_bucket`*::
++
+--
+Histogram of durations spent in queue by queries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_query_wait_time_sum`*::
++
+--
+Sum of Histogram of durations spent in queue by queries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_query_wait_time_count`*::
++
+--
+Count of Histogram of durations spent in queue by queries
+
+
+type: double
+
+--
+
+*`prometheus.metrics.txnwaitqueue_query_waiting`*::
++
+--
+Number of transaction status queries waiting for an updated transaction record
+
+
+type: double
+
+--
+
+*`prometheus.metrics.valbytes`*::
++
+--
+Number of bytes taken up by values
+
+
+type: double
+
+--
+
+*`prometheus.metrics.valcount`*::
++
+--
+Count of all values
+
+
+type: double
+
+--
+
 
 [[exported-fields-common]]
 == Common fields

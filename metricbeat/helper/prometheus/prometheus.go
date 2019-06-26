@@ -67,18 +67,23 @@ func (p *prometheus) GetFamilies() ([]*dto.MetricFamily, error) {
 
 	format := expfmt.ResponseFormat(resp.Header)
 	if format == "" {
-		return nil, fmt.Errorf("Invalid format for response of response")
+		return nil, fmt.Errorf("invalid format for response of response")
 	}
 
-	decoder := expfmt.NewDecoder(resp.Body, format)
+	return GetFamilies(resp.Body, format)
+}
+
+// GetFamilies parses families from a reader
+func GetFamilies(input io.Reader, format expfmt.Format) ([]*dto.MetricFamily, error) {
+	decoder := expfmt.NewDecoder(input, format)
 	if decoder == nil {
-		return nil, fmt.Errorf("Unable to create decoder to decode response")
+		return nil, fmt.Errorf("unable to create decoder to decode prometheus input")
 	}
 
 	families := []*dto.MetricFamily{}
 	for {
 		mf := &dto.MetricFamily{}
-		err = decoder.Decode(mf)
+		err := decoder.Decode(mf)
 		if err != nil {
 			if err == io.EOF {
 				break
