@@ -46,6 +46,7 @@ https://github.com/elastic/beats/compare/v6.6.2...6.6[Check the HEAD diff]
 *Metricbeat*
 
 - Fix parsing error using GET in Jolokia module. {pull}11075[11075] {issue}11071[11071]
+- Fix silent failures in kafka and prometheus module. {pull}13353[13353] {issue}13252[13252]
 
 *Packetbeat*
 
