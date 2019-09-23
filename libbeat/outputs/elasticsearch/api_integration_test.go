@@ -92,6 +92,9 @@ func TestIngest(t *testing.T) {
 	index := fmt.Sprintf("beats-test-ingest-%d", os.Getpid())
 	pipeline := fmt.Sprintf("beats-test-pipeline-%d", os.Getpid())
 
+	t.Log("Index: ", index)
+	t.Log("Pipeline: ", pipeline)
+
 	pipelineBody := obj{
 		"description": "Test pipeline",
 		"processors": []obj{
@@ -138,7 +141,7 @@ func TestIngest(t *testing.T) {
 	}
 
 	params := map[string]string{"refresh": "true"}
-	_, resp, err = client.Ingest(index, "test", pipeline, "1", params, obj{
+	_, resp, err = client.Ingest(index, "_doc", pipeline, "1", params, obj{
 		"testfield": "TEST",
 	})
 	if err != nil {
@@ -149,7 +152,7 @@ func TestIngest(t *testing.T) {
 	}
 
 	// get _source field from indexed document
-	_, docBody, err := client.apiCall("GET", index, "test", "1/_source", "", nil, nil)
+	_, docBody, err := client.apiCall("GET", index, "_doc", "1", "", nil, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,5 +165,5 @@ func TestIngest(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, "test", doc.Field)
+	assert.Equal(t, "", doc.Field)
 }
