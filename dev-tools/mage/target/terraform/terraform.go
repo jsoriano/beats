@@ -1,6 +1,8 @@
 package terraform
 
 import (
+	"fmt"
+
 	"github.com/pkg/errors"
 
 	"github.com/magefile/mage/mg"
@@ -13,16 +15,19 @@ type Terraform mg.Namespace
 
 // Apply applies a terraform configuration
 func (t Terraform) Apply() error {
+	fmt.Println(">> terraform: Applying configuration")
 	return t.apply()
 }
 
 // AWS is the equivalent of apply with TARGETS=module.aws
 func (t Terraform) AWS() error {
+	fmt.Println(">> terraform: Applying configuration for AWS resorces")
 	return t.apply("module.aws")
 }
 
 // Destroy destroys a terraform configuration
 func (t Terraform) Destroy() error {
+	fmt.Println(">> terraform: Destroying configuration")
 	tf := devtools.NewTerraform()
 	err := tf.Destroy()
 	return errors.Wrap(err, "destroying terraform configuration")

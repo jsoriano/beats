@@ -1,6 +1,6 @@
 variable "profile" {
   type    = string
-  default = "filebeat"
+  default = "beats"
 }
 
 variable "region" {

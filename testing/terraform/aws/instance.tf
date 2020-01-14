@@ -33,5 +33,5 @@ provider "local" {
 }
 
 data "local_file" "install_webserver" {
-  filename = "./install_webserver.sh"
+  filename = "${path.module}/install_webserver.sh"
 }
