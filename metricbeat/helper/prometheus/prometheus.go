@@ -18,6 +18,7 @@
 package prometheus
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -70,11 +71,13 @@ func (p *prometheus) GetFamilies() ([]*dto.MetricFamily, error) {
 	}
 	defer resp.Body.Close()
 
+	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, errors.Wrap(err, "reading body")
+	}
+
 	if resp.StatusCode > 399 {
-		bodyBytes, err := ioutil.ReadAll(resp.Body)
-		if err == nil {
-			p.logger.Debug("error received from prometheus endpoint: ", string(bodyBytes))
-		}
+		p.logger.Debug("error received from prometheus endpoint: ", string(bodyBytes))
 		return nil, fmt.Errorf("unexpected status code %d from server", resp.StatusCode)
 	}
 
@@ -83,7 +86,7 @@ func (p *prometheus) GetFamilies() ([]*dto.MetricFamily, error) {
 		return nil, fmt.Errorf("Invalid format for response of response")
 	}
 
-	decoder := expfmt.NewDecoder(resp.Body, format)
+	decoder := expfmt.NewDecoder(bytes.NewReader(bodyBytes), format)
 	if decoder == nil {
 		return nil, fmt.Errorf("Unable to create decoder to decode response")
 	}
@@ -96,6 +99,7 @@ func (p *prometheus) GetFamilies() ([]*dto.MetricFamily, error) {
 			if err == io.EOF {
 				break
 			}
+			p.logger.Debug("response from prometheus endpoint: ", string(bodyBytes))
 			return nil, errors.Wrap(err, "decoding of metric family failed")
 		} else {
 			families = append(families, mf)
