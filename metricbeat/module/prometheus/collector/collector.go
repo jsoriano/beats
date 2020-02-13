@@ -18,9 +18,12 @@
 package collector
 
 import (
+	"runtime"
+
 	"github.com/pkg/errors"
 
 	"github.com/elastic/beats/libbeat/common"
+	"github.com/elastic/beats/libbeat/logp"
 	p "github.com/elastic/beats/metricbeat/helper/prometheus"
 	"github.com/elastic/beats/metricbeat/mb"
 	"github.com/elastic/beats/metricbeat/mb/parse"
@@ -67,12 +70,16 @@ func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 
 // Fetch fetches data and reports it
 func (m *MetricSet) Fetch(reporter mb.ReporterV2) error {
-	families, err := m.prometheus.GetFamilies()
+	var memStats runtime.MemStats
 
-	eventList := map[string]common.MapStr{}
+	runtime.ReadMemStats(&memStats)
+	logp.Warn("Before getting families, alloc: %d, total: %d", memStats.Alloc, memStats.TotalAlloc)
+
+	families, err := m.prometheus.GetFamilies()
 	if err != nil {
-		m.addUpEvent(eventList, 0)
-		for _, evt := range eventList {
+		event := make(map[string]common.MapStr)
+		m.addUpEvent(event, 0)
+		for evt := range event {
 			reporter.Event(mb.Event{
 				RootFields: common.MapStr{"prometheus": evt},
 			})
@@ -80,7 +87,12 @@ func (m *MetricSet) Fetch(reporter mb.ReporterV2) error {
 		return errors.Wrap(err, "unable to decode response from prometheus endpoint")
 	}
 
-	for _, family := range families {
+	runtime.ReadMemStats(&memStats)
+	logp.Warn("After getting families, alloc: %d, total: %d", memStats.Alloc, memStats.TotalAlloc)
+
+	eventList := map[string]common.MapStr{}
+	for families.Decode() {
+		family := families.Family()
 		promEvents := getPromEventsFromMetricFamily(family)
 
 		for _, promEvent := range promEvents {
@@ -110,7 +122,14 @@ func (m *MetricSet) Fetch(reporter mb.ReporterV2) error {
 		}
 	}
 
+	if err := families.Err(); err != nil {
+		return err
+	}
+
 	m.addUpEvent(eventList, 1)
+
+	runtime.ReadMemStats(&memStats)
+	logp.Warn("After getting event list, alloc: %d, total: %d", memStats.Alloc, memStats.TotalAlloc)
 
 	// Converts hash list to slice
 	for _, e := range eventList {

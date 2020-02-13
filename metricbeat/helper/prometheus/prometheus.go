@@ -36,11 +36,18 @@ import (
 // Prometheus helper retrieves prometheus formatted metrics
 type Prometheus interface {
 	// GetFamilies requests metric families from prometheus endpoint and returns them
-	GetFamilies() ([]*dto.MetricFamily, error)
+	GetFamilies() (FamiliesDecoder, error)
 
 	GetProcessedMetrics(mapping *MetricsMapping) ([]common.MapStr, error)
 
 	ReportProcessedMetrics(mapping *MetricsMapping, r mb.ReporterV2) error
+}
+
+// Families decoder
+type FamiliesDecoder interface {
+	Decode() bool
+	Family() *dto.MetricFamily
+	Err() error
 }
 
 type prometheus struct {
@@ -62,13 +69,48 @@ func NewPrometheusClient(base mb.BaseMetricSet) (Prometheus, error) {
 	return &prometheus{http, base.Logger()}, nil
 }
 
+type familiesDecoder struct {
+	decoder expfmt.Decoder
+	closer  io.Closer
+	family  *dto.MetricFamily
+	err     error
+}
+
+func (d *familiesDecoder) Decode() bool {
+	d.family = &dto.MetricFamily{}
+	err := d.decoder.Decode(d.family)
+	if err != nil {
+		if err != io.EOF {
+			d.err = errors.Wrap(err, "decoding metric family")
+		}
+		d.Close()
+		return false
+	}
+
+	return true
+}
+
+func (d *familiesDecoder) Family() *dto.MetricFamily {
+	return d.family
+}
+
+func (d *familiesDecoder) Close() error {
+	if d.closer == nil {
+		return nil
+	}
+	return d.closer.Close()
+}
+
+func (d *familiesDecoder) Err() error {
+	return d.err
+}
+
 // GetFamilies requests metric families from prometheus endpoint and returns them
-func (p *prometheus) GetFamilies() ([]*dto.MetricFamily, error) {
+func (p *prometheus) GetFamilies() (FamiliesDecoder, error) {
 	resp, err := p.FetchResponse()
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
 
 	if resp.StatusCode > 399 {
 		bodyBytes, err := ioutil.ReadAll(resp.Body)
@@ -80,29 +122,15 @@ func (p *prometheus) GetFamilies() ([]*dto.MetricFamily, error) {
 
 	format := expfmt.ResponseFormat(resp.Header)
 	if format == "" {
-		return nil, fmt.Errorf("Invalid format for response of response")
+		return nil, fmt.Errorf("invalid format for response of response")
 	}
 
 	decoder := expfmt.NewDecoder(resp.Body, format)
 	if decoder == nil {
-		return nil, fmt.Errorf("Unable to create decoder to decode response")
+		return nil, fmt.Errorf("unable to create decoder to decode response")
 	}
 
-	families := []*dto.MetricFamily{}
-	for {
-		mf := &dto.MetricFamily{}
-		err = decoder.Decode(mf)
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, errors.Wrap(err, "decoding of metric family failed")
-		} else {
-			families = append(families, mf)
-		}
-	}
-
-	return families, nil
+	return &familiesDecoder{decoder: decoder, closer: resp.Body}, nil
 }
 
 // MetricsMapping defines mapping settings for Prometheus metrics, to be used with `GetProcessedMetrics`
@@ -128,7 +156,8 @@ func (p *prometheus) GetProcessedMetrics(mapping *MetricsMapping) ([]common.MapS
 
 	eventsMap := map[string]common.MapStr{}
 	infoMetrics := []*infoMetricData{}
-	for _, family := range families {
+	for families.Decode() {
+		family := families.Family()
 		for _, metric := range family.GetMetric() {
 			m, ok := mapping.Metrics[family.GetName()]
 			if m == nil || !ok {
@@ -207,6 +236,10 @@ func (p *prometheus) GetProcessedMetrics(mapping *MetricsMapping) ([]common.MapS
 				event.DeepUpdate(labels)
 			}
 		}
+	}
+
+	if err := families.Err(); err != nil {
+		return nil, err
 	}
 
 	// populate events array from values in eventsMap
