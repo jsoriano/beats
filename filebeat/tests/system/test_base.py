@@ -2,7 +2,6 @@ import os
 import unittest
 from filebeat import BaseTest
 from elasticsearch import Elasticsearch
-from beat.beat import INTEGRATION_TESTS
 
 
 class Test(BaseTest):
@@ -26,7 +25,7 @@ class Test(BaseTest):
         assert "@timestamp" in output
         assert "input.type" in output
 
-    @unittest.skipUnless(INTEGRATION_TESTS, "integration test")
+    @pytest.mark.tag('integration')
     def test_template(self):
         """
         Test that the template can be loaded with `setup --template`
@@ -41,7 +40,7 @@ class Test(BaseTest):
         assert self.log_contains('Loaded index template')
         assert len(es.cat.templates(name='filebeat-*', h='name')) > 0
 
-    @unittest.skipUnless(INTEGRATION_TESTS, "integration test")
+    @pytest.mark.tag('integration')
     def test_template_migration(self):
         """
         Test that the template can be loaded with `setup --template`

@@ -1,5 +1,4 @@
 from filebeat import BaseTest
-from beat.beat import INTEGRATION_TESTS
 import os
 import unittest
 import glob
@@ -84,10 +83,9 @@ class Test(BaseTest):
         self.es.transport.perform_request('PUT', "/_cluster/settings", body=body)
 
     @parameterized.expand(load_fileset_test_cases)
-    @unittest.skipIf(not INTEGRATION_TESTS,
-                     "integration tests are disabled, run with INTEGRATION_TESTS=1 to enable them.")
     @unittest.skipIf(os.getenv("TESTING_ENVIRONMENT") == "2x",
                      "integration test not available on 2.x")
+    @pytest.mark.tag('integration')
     def test_fileset_file(self, module, fileset, test_file):
         self.init()
 

@@ -1,17 +1,16 @@
 import os
 import filebeat
+import pytest
 import unittest
-
-from beat.beat import INTEGRATION_TESTS
 
 
 class TestAutodiscover(filebeat.BaseTest):
     """
     Test filebeat autodiscover
     """
-    @unittest.skipIf(not INTEGRATION_TESTS or
-                     os.getenv("TESTING_ENVIRONMENT") == "2x",
+    @unittest.skipIf(os.getenv("TESTING_ENVIRONMENT") == "2x",
                      "integration test not available on 2.x")
+    @pytest.mark.tag('integration')
     def test_docker(self):
         """
         Test docker autodiscover starts input
@@ -57,9 +56,9 @@ class TestAutodiscover(filebeat.BaseTest):
 
         self.assert_fields_are_documented(output[0])
 
-    @unittest.skipIf(not INTEGRATION_TESTS or
-                     os.getenv("TESTING_ENVIRONMENT") == "2x",
+    @unittest.skipIf(os.getenv("TESTING_ENVIRONMENT") == "2x",
                      "integration test not available on 2.x")
+    @pytest.mark.tag('integration')
     def test_default_settings(self):
         """
         Test docker autodiscover default config settings

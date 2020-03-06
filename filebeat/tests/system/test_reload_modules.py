@@ -1,11 +1,11 @@
 import re
 import unittest
 import os
+import pytest
 import shutil
 import time
 
 from filebeat import BaseTest
-from beat.beat import INTEGRATION_TESTS
 from elasticsearch import Elasticsearch
 
 
@@ -26,9 +26,6 @@ class Test(BaseTest):
 
     def setUp(self):
         super(BaseTest, self).setUp()
-        if INTEGRATION_TESTS:
-            self.es = Elasticsearch([self.get_elasticsearch_url()])
-
         # Copy system module
         shutil.copytree(os.path.join(self.beat_path, "tests", "system", "module", "test"),
                         os.path.join(self.working_dir, "module", "test"))
@@ -62,7 +59,7 @@ class Test(BaseTest):
         assert self.output_has_message("Hello world")
         proc.check_kill_and_wait()
 
-    @unittest.skipUnless(INTEGRATION_TESTS, "integration test")
+    @pytest.mark.tag('integration')
     def test_reload_writes_pipeline(self):
         """
         Test modules reload brings pipelines
@@ -90,8 +87,9 @@ class Test(BaseTest):
             f.write("Hello world\n")
 
         # Check pipeline is present
+        es = Elasticsearch([self.get_elasticsearch_url()])
         self.wait_until(lambda: any(re.match("filebeat-.*-test-test-default", key)
-                                    for key in self.es.transport.perform_request("GET", "/_ingest/pipeline/").keys()))
+                                    for key in es.transport.perform_request("GET", "/_ingest/pipeline/").keys()))
         proc.check_kill_and_wait()
 
     def test_no_es_connection(self):

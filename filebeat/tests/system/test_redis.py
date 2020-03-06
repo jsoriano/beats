@@ -1,5 +1,3 @@
-from filebeat import BaseTest
-from beat.beat import INTEGRATION_TESTS
 import os
 import unittest
 import glob
@@ -7,6 +5,8 @@ import subprocess
 import json
 import logging
 import redis
+import pytest
+from filebeat import BaseTest
 
 
 class Test(BaseTest):
@@ -18,7 +18,7 @@ class Test(BaseTest):
         r.config_set('slowlog-max-len', 200)
         return r
 
-    @unittest.skipUnless(INTEGRATION_TESTS, "integration test")
+    @pytest.mark.tag('integration')
     def test_input(self):
         r = self.init()
         r.set("hello", "world")

@@ -1,13 +1,12 @@
 import unittest
 import os
+import pytest
 import yaml
 from shutil import copytree, copyfile
 
 from elasticsearch import Elasticsearch
-
 from filebeat import BaseTest
 
-INTEGRATION_TESTS = os.environ.get('INTEGRATION_TESTS', False)
 
 
 class Test(BaseTest):

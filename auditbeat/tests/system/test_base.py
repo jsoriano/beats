@@ -1,11 +1,11 @@
 import re
 import sys
 import os
+import pytest
 import shutil
 import unittest
 from auditbeat import *
 from elasticsearch import Elasticsearch
-from beat.beat import INTEGRATION_TESTS
 
 
 class Test(BaseTest):
@@ -33,7 +33,7 @@ class Test(BaseTest):
             assert self.log_contains("auditbeat start running")
             assert self.log_contains("auditbeat stopped")
 
-    @unittest.skipUnless(INTEGRATION_TESTS, "integration test")
+    @pytest.mark.tag('integration')
     def test_template(self):
         """
         Test that the template can be loaded with `setup --template`
@@ -55,7 +55,7 @@ class Test(BaseTest):
             assert self.log_contains('Loaded index template')
             assert len(es.cat.templates(name='auditbeat-*', h='name')) > 0
 
-    @unittest.skipUnless(INTEGRATION_TESTS, "integration test")
+    @pytest.mark.tag('integration')
     def test_dashboards(self):
         """
         Test that the dashboards can be loaded with `setup --dashboards`

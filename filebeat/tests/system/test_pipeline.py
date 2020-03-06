@@ -1,10 +1,10 @@
-from filebeat import BaseTest
-from beat.beat import INTEGRATION_TESTS
-import os
-import unittest
-from elasticsearch import Elasticsearch
 import json
 import logging
+import os
+import pytest
+import unittest
+from elasticsearch import Elasticsearch
+from filebeat import BaseTest
 
 
 class Test(BaseTest):
@@ -28,8 +28,7 @@ class Test(BaseTest):
 
         self.index_name = "test-filebeat-pipeline"
 
-    @unittest.skipIf(not INTEGRATION_TESTS,
-                     "integration tests are disabled, run with INTEGRATION_TESTS=1 to enable them.")
+    @pytest.mark.tag("integration")
     @unittest.skipIf(os.getenv("TESTING_ENVIRONMENT") == "2x",
                      "integration test not available on 2.x")
     def test_input_pipeline_config(self):

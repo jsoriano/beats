@@ -3,16 +3,17 @@ import sys
 import tarfile
 import time
 import io
+from compose.cli.command import get_project
+from compose.config.environment import Environment
+from compose.service import BuildAction
+from compose.service import ConvergenceStrategy
 
 
 INTEGRATION_TESTS = os.environ.get('INTEGRATION_TESTS', False)
 
-if INTEGRATION_TESTS:
-    from compose.cli.command import get_project
-    from compose.config.environment import Environment
-    from compose.service import BuildAction
-    from compose.service import ConvergenceStrategy
-
+def enable():
+    global INTEGRATION_TESTS
+    INTEGRATION_TESTS = True
 
 class ComposeMixin(object):
     """
