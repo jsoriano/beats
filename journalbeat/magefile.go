@@ -193,7 +193,11 @@ func installDependencies(arch string, pkgs ...string) error {
 		return err
 	}
 
-	params := append([]string{"install", "-y", "--no-install-recommends"}, pkgs...)
+	params := append([]string{"install", "-y", "--no-install-recommends", "--allow-unauthenticated"}, pkgs...)
+	// Journalbeat is built with old versions that don't update their repositories,
+	// ignore expiration checks.
+	params = append(params, "-o", "Acquire::Check-Valid-Until=false")
+	params = append(params, pkgs...)
 	return sh.Run("apt-get", params...)
 }
 
