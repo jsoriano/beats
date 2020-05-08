@@ -89,14 +89,15 @@ require (
 	github.com/google/gopacket v1.1.18-0.20191009163724-0ad7f2610e34
 	github.com/google/uuid v1.1.2-0.20190416172445-c2e93f3ae59f // indirect
 	github.com/googleapis/gnostic v0.3.1-0.20190624222214-25d8b0b66985 // indirect
-	github.com/gorhill/cronexpr v0.0.0-20161205141322-d520615e531a
+	github.com/gorhill/cronexpr v0.0.0-20180427100037-88b0669f7d75
 	github.com/gorilla/mux v1.7.2 // indirect
-	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.13.0 // indirect
 	github.com/h2non/filetype v1.0.12
 	github.com/hashicorp/go-multierror v1.0.0
 	github.com/hashicorp/golang-lru v0.5.2-0.20190520140433-59383c442f7d // indirect
+	github.com/hashicorp/nomad/api v0.0.0-20200507195724-f5c84fca8e12
 	github.com/insomniacslk/dhcp v0.0.0-20180716145214-633285ba52b2
+	github.com/jarcoal/httpmock v1.0.5
 	github.com/jcmturner/gofork v1.0.0 // indirect
 	github.com/jmoiron/sqlx v1.2.1-0.20190826204134-d7d95172beb5
 	github.com/joeshaw/multierror v0.0.0-20140124173710-69b34d4ec901
@@ -136,7 +137,7 @@ require (
 	github.com/shirou/gopsutil v2.19.11+incompatible
 	github.com/spf13/cobra v0.0.3
 	github.com/spf13/pflag v1.0.3
-	github.com/stretchr/testify v1.5.0
+	github.com/stretchr/testify v1.5.1
 	github.com/tsg/go-daemon v0.0.0-20200207173439-e704b93fd89b
 	github.com/tsg/gopacket v0.0.0-20190320122513-dd3d0e41124a
 	github.com/urso/ecslog v0.0.1

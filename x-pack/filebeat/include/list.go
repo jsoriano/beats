@@ -37,5 +37,6 @@ import (
 	_ "github.com/elastic/beats/v7/x-pack/filebeat/module/rabbitmq"
 	_ "github.com/elastic/beats/v7/x-pack/filebeat/module/suricata"
 	_ "github.com/elastic/beats/v7/x-pack/filebeat/module/zeek"
+	_ "github.com/elastic/beats/v7/x-pack/filebeat/processors/add_nomad_metadata"
 	_ "github.com/elastic/beats/v7/x-pack/filebeat/processors/decode_cef"
 )

@@ -575,7 +575,7 @@ github.com/googleapis/gax-go/v2
 github.com/googleapis/gnostic/OpenAPIv2
 github.com/googleapis/gnostic/compiler
 github.com/googleapis/gnostic/extensions
-# github.com/gorhill/cronexpr v0.0.0-20161205141322-d520615e531a
+# github.com/gorhill/cronexpr v0.0.0-20180427100037-88b0669f7d75
 github.com/gorhill/cronexpr
 # github.com/gorilla/websocket v1.4.1
 github.com/gorilla/websocket
@@ -590,8 +590,12 @@ github.com/h2non/filetype/matchers/isobmff
 github.com/h2non/filetype/types
 # github.com/hashicorp/errwrap v1.0.0
 github.com/hashicorp/errwrap
+# github.com/hashicorp/go-cleanhttp v0.5.1
+github.com/hashicorp/go-cleanhttp
 # github.com/hashicorp/go-multierror v1.0.0
 github.com/hashicorp/go-multierror
+# github.com/hashicorp/go-rootcerts v1.0.2
+github.com/hashicorp/go-rootcerts
 # github.com/hashicorp/go-uuid v1.0.1
 github.com/hashicorp/go-uuid
 # github.com/hashicorp/go-version v1.0.0
@@ -599,6 +603,9 @@ github.com/hashicorp/go-version
 # github.com/hashicorp/golang-lru v0.5.2-0.20190520140433-59383c442f7d
 github.com/hashicorp/golang-lru
 github.com/hashicorp/golang-lru/simplelru
+# github.com/hashicorp/nomad/api v0.0.0-20200507195724-f5c84fca8e12
+github.com/hashicorp/nomad/api
+github.com/hashicorp/nomad/api/contexts
 # github.com/haya14busa/go-actions-toolkit v0.0.0-20200105081403-ca0307860f01
 github.com/haya14busa/go-actions-toolkit/core
 # github.com/imdario/mergo v0.3.6
@@ -608,6 +615,8 @@ github.com/inconshreveable/mousetrap
 # github.com/insomniacslk/dhcp v0.0.0-20180716145214-633285ba52b2 => github.com/elastic/dhcp v0.0.0-20200227161230-57ec251c7eb3
 github.com/insomniacslk/dhcp/dhcpv4
 github.com/insomniacslk/dhcp/iana
+# github.com/jarcoal/httpmock v1.0.5
+github.com/jarcoal/httpmock
 # github.com/jcmturner/gofork v1.0.0
 github.com/jcmturner/gofork/encoding/asn1
 github.com/jcmturner/gofork/x/crypto/pbkdf2
@@ -764,7 +773,7 @@ github.com/spf13/cobra
 github.com/spf13/pflag
 # github.com/stretchr/objx v0.2.0
 github.com/stretchr/objx
-# github.com/stretchr/testify v1.5.0
+# github.com/stretchr/testify v1.5.1
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/mock
 github.com/stretchr/testify/require
