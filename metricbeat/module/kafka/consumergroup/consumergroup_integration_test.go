@@ -27,6 +27,7 @@ import (
 	saramacluster "github.com/bsm/sarama-cluster"
 	"github.com/pkg/errors"
 
+	"github.com/elastic/beats/v7/libbeat/logp"
 	"github.com/elastic/beats/v7/libbeat/tests/compose"
 	"github.com/elastic/beats/v7/metricbeat/mb"
 	mbtest "github.com/elastic/beats/v7/metricbeat/mb/testing"
@@ -63,6 +64,8 @@ func TestData(t *testing.T) {
 }
 
 func TestFetch(t *testing.T) {
+	logp.TestingSetup()
+
 	service := compose.EnsureUp(t, "kafka",
 		compose.UpWithTimeout(600*time.Second),
 		compose.UpWithAdvertisedHostEnvFileForPort(9092),

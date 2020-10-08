@@ -24,6 +24,7 @@ import (
 	"net"
 	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/pkg/errors"
@@ -32,7 +33,36 @@ import (
 
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/elastic/beats/v7/libbeat/common/kafka"
+	"github.com/elastic/beats/v7/libbeat/logp"
 )
+
+var saramaloggerInitOnce sync.Once
+
+func InitSaramaLogger() {
+	saramaloggerInitOnce.Do(func() {
+		sarama.Logger = NewSaramaLogger("kafka.sarama")
+	})
+}
+
+type LogpStdLogger struct {
+	*logp.Logger
+}
+
+func NewSaramaLogger(name string) *LogpStdLogger {
+	return &LogpStdLogger{logp.NewLogger(name)}
+}
+
+func (l *LogpStdLogger) Print(v ...interface{}) {
+	l.Debug(v...)
+}
+
+func (l *LogpStdLogger) Printf(format string, v ...interface{}) {
+	l.Debugf(format, v...)
+}
+
+func (l *LogpStdLogger) Println(v ...interface{}) {
+	l.Debug(v...)
+}
 
 // Version returns a kafka version from its string representation
 func Version(version string) kafka.Version {
@@ -77,6 +107,8 @@ const noID = -1
 
 // NewBroker creates a new unconnected kafka Broker connection instance.
 func NewBroker(host string, settings BrokerSettings) *Broker {
+	InitSaramaLogger()
+
 	cfg := sarama.NewConfig()
 	cfg.Net.DialTimeout = settings.DialTimeout
 	cfg.Net.ReadTimeout = settings.ReadTimeout
